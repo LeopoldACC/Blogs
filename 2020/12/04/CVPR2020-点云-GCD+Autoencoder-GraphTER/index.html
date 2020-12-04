@@ -484,6 +484,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/Blogs/libs/prism/prism.css">
+        
 
         
 
@@ -494,7 +497,7 @@
 <p>这段话意思就是:现在GCN在非欧式数据(比如点云)上有很好的效果,但图结构标注数据量过大,所以提出用无监督的方式(自编码器)学一个变换,从而能在被全局变换或者局部变换后的的数据上也能提取到相对应的图结构</p>
 <p>where f() is a linear or non-linear function applied to each pair of nodes to get the pair-wise similarity. For example,a widely adopted function is to nonlinearly construct a k-nearest-neighbor (kNN) graph from node features</p>
 <p>和pointnet系列的文章一样,图的边权是通过KNN(k个最近的点与中心点的差)+MLP(多层感知机)提取到的<br>$$A = f(X)$$</p>
-<p>Formally, suppose we sample a graph transformation t from a transformation distribution Tg, i.e., t<del>Tg. Applying the transformation to graph signals X that are sampled from data distribution Xg, i.e., X</del>Xg, leads to the filtered graph signal</p>
+<p>Formally, suppose we sample a graph transformation t from a transformation distribution Tg, i.e., t $\sim$ Tg. Applying the transformation to graph signals X that are sampled from data distribution Xg, i.e., X $\sim$ Xg, leads to the filtered graph signal</p>
 <p>对变换方式的分布进行采样 并对图数据信号进行变换,则得到变换后的图信号<br>$$\widetilde{X} = t(X)$$<br>以及变换后的图结构<br>$$\widetilde{A} = f(\widetilde{X}) = f(t(X))$$</p>
 <p>然后对变换前的点云$X$和变换后的点云$\tilde{X}$在共享的encoder中做GCN,</p>
 <p>$$<br>X_{n×d}^{output}=A_{n×n}X_{n×d}W_{d×d’}<br>$$</p>
@@ -987,6 +990,17 @@
     });
 </script>
 
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 

@@ -329,10 +329,104 @@
 
 
 
-<main class="container content">
+<main class="post-container content">
 
     
-    <!-- 文章内容详情 -->
+    <link rel="stylesheet" href="/Blogs/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
@@ -386,20 +480,98 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/Blogs/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class ListNode:</span><br><span class="line">    def __init__(self, x):</span><br><span class="line">        self.val &#x3D; x</span><br><span class="line">        self.next &#x3D; None</span><br></pre></td></tr></table></figure>
+                <pre class="line-numbers language-none"><code class="language-none">class ListNode:
+    def __init__(self, x):
+        self.val &#x3D; x
+        self.next &#x3D; None<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="92反转链表2"><a href="#92反转链表2" class="headerlink" title="92反转链表2"></a>92反转链表2</h1><p><code>pre:开始反转的前一个节点</code></p>
 <p><code>cur:原链表当前节点</code></p>
 <p><code>ne:原链表下一个节点</code></p>
 <p><code>nx:新链表下一个节点,初始化为第n+1个节点</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseBetween</span>(<span class="params">self, head: ListNode, m: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; ListNode:</span></span><br><span class="line">        tmp = ListNode(<span class="number">0</span>)</span><br><span class="line">        tmp.<span class="built_in">next</span> = head</span><br><span class="line">        pre = tmp</span><br><span class="line">        cur = tmp</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            pre = cur</span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">        p = cur</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-m+<span class="number">1</span>):</span><br><span class="line">            p = p.<span class="built_in">next</span></span><br><span class="line">        nx = p<span class="comment">#这里的nx是更新后的nx 1→2→3→4→5中更新后4→3→2→5  那么第一次到2时 更新后2→5 nx初始化为5 cur=ne=3后nx=2 </span></span><br><span class="line">        <span class="keyword">while</span> cur!=p:<span class="comment"># a b c</span></span><br><span class="line">            ne = cur.<span class="built_in">next</span></span><br><span class="line">            <span class="comment"># print(pre.val,cur.val,ne.val)</span></span><br><span class="line">            cur.<span class="built_in">next</span> = nx</span><br><span class="line">            nx = cur</span><br><span class="line">            cur = ne</span><br><span class="line">            </span><br><span class="line">        pre.<span class="built_in">next</span> = nx<span class="comment"># fro:1→2→3→4→5中的1</span></span><br><span class="line">        <span class="keyword">return</span> tmp.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">reverseBetween</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> head<span class="token punctuation">:</span> ListNode<span class="token punctuation">,</span> m<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span> n<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> ListNode<span class="token punctuation">:</span>
+        tmp <span class="token operator">=</span> ListNode<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+        tmp<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> head
+        pre <span class="token operator">=</span> tmp
+        cur <span class="token operator">=</span> tmp
+        
+        
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            pre <span class="token operator">=</span> cur
+            cur <span class="token operator">=</span> cur<span class="token punctuation">.</span><span class="token builtin">next</span>
+        p <span class="token operator">=</span> cur
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token operator">-</span>m<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            p <span class="token operator">=</span> p<span class="token punctuation">.</span><span class="token builtin">next</span>
+        nx <span class="token operator">=</span> p<span class="token comment">#这里的nx是更新后的nx 1→2→3→4→5中更新后4→3→2→5  那么第一次到2时 更新后2→5 nx初始化为5 cur=ne=3后nx=2 </span>
+        <span class="token keyword">while</span> cur<span class="token operator">!=</span>p<span class="token punctuation">:</span><span class="token comment"># a b c</span>
+            ne <span class="token operator">=</span> cur<span class="token punctuation">.</span><span class="token builtin">next</span>
+            <span class="token comment"># print(pre.val,cur.val,ne.val)</span>
+            cur<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> nx
+            nx <span class="token operator">=</span> cur
+            cur <span class="token operator">=</span> ne
+            
+        pre<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> nx<span class="token comment"># fro:1→2→3→4→5中的1</span>
+        <span class="token keyword">return</span> tmp<span class="token punctuation">.</span><span class="token builtin">next</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="链表排序"><a href="#链表排序" class="headerlink" title="链表排序"></a>链表排序</h1><h2 id="147链表插入排序O-n-2"><a href="#147链表插入排序O-n-2" class="headerlink" title="147链表插入排序O(n^2)"></a>147链表插入排序O(n^2)</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertionSortList</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">        tmp = ListNode(<span class="number">0</span>)</span><br><span class="line">        tmp.<span class="built_in">next</span> = head</span><br><span class="line">        pre = tmp</span><br><span class="line">        cur = head</span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            ne = cur.<span class="built_in">next</span></span><br><span class="line">            p = tmp.<span class="built_in">next</span></span><br><span class="line">            pre = tmp</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> ne:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> ne.val&lt;cur.val:</span><br><span class="line">                nee = ne.<span class="built_in">next</span></span><br><span class="line">                ne.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line">                <span class="keyword">while</span> p.<span class="built_in">next</span>!=ne <span class="keyword">and</span> p.val&lt;ne.val:</span><br><span class="line">                    p = p.<span class="built_in">next</span></span><br><span class="line">                    pre = pre.<span class="built_in">next</span></span><br><span class="line">                cur.<span class="built_in">next</span> = nee<span class="comment">#把ne删了</span></span><br><span class="line">                pre.<span class="built_in">next</span> = ne</span><br><span class="line">                ne.<span class="built_in">next</span> = p</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cur = cur.<span class="built_in">next</span></span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> cur.<span class="built_in">next</span> <span class="keyword">and</span> cur.<span class="built_in">next</span>.val&gt;cur.val:</span><br><span class="line">                cur = cur.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> tmp.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
-<h2 id="148链表归并排序O-nlog-n"><a href="#148链表归并排序O-nlog-n" class="headerlink" title="148链表归并排序O(nlog(n))"></a>148链表归并排序O(nlog(n))</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sortList</span>(<span class="params">self, head: ListNode</span>) -&gt; ListNode:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">p</span>):</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> p <span class="keyword">or</span> <span class="keyword">not</span> p.<span class="built_in">next</span>:</span><br><span class="line">                <span class="keyword">return</span> p</span><br><span class="line">            s,f = p,p.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">while</span> f <span class="keyword">and</span> f.<span class="built_in">next</span>:</span><br><span class="line">                s,f = s.<span class="built_in">next</span>,f.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            <span class="comment"># 截断</span></span><br><span class="line">            mid,s.<span class="built_in">next</span> = s.<span class="built_in">next</span>,<span class="literal">None</span></span><br><span class="line">            <span class="comment"># 先把子序列排好</span></span><br><span class="line">            l,r = dfs(p),dfs(mid)</span><br><span class="line">            h = res = ListNode(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">while</span> l <span class="keyword">and</span> r:</span><br><span class="line">                <span class="keyword">if</span> l.val&lt;r.val:</span><br><span class="line">                    h.<span class="built_in">next</span> = l</span><br><span class="line">                    l = l.<span class="built_in">next</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    h.<span class="built_in">next</span> = r</span><br><span class="line">                    r = r.<span class="built_in">next</span></span><br><span class="line">                h = h.<span class="built_in">next</span></span><br><span class="line">            h.<span class="built_in">next</span> = l <span class="keyword">if</span> l <span class="keyword">else</span> r</span><br><span class="line">            <span class="keyword">return</span> res.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> dfs(head)</span><br></pre></td></tr></table></figure>
+<h1 id="链表排序"><a href="#链表排序" class="headerlink" title="链表排序"></a>链表排序</h1><h2 id="147链表插入排序O-n-2"><a href="#147链表插入排序O-n-2" class="headerlink" title="147链表插入排序O(n^2)"></a>147链表插入排序O(n^2)</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">insertionSortList</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> head<span class="token punctuation">:</span> ListNode<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> ListNode<span class="token punctuation">:</span>
+        tmp <span class="token operator">=</span> ListNode<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+        tmp<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> head
+        pre <span class="token operator">=</span> tmp
+        cur <span class="token operator">=</span> head
+        <span class="token keyword">while</span> cur<span class="token punctuation">:</span>
+            ne <span class="token operator">=</span> cur<span class="token punctuation">.</span><span class="token builtin">next</span>
+            p <span class="token operator">=</span> tmp<span class="token punctuation">.</span><span class="token builtin">next</span>
+            pre <span class="token operator">=</span> tmp
+            <span class="token keyword">if</span> <span class="token keyword">not</span> ne<span class="token punctuation">:</span>
+                <span class="token keyword">break</span>
+            <span class="token keyword">if</span> ne<span class="token punctuation">.</span>val<span class="token operator">&lt;</span>cur<span class="token punctuation">.</span>val<span class="token punctuation">:</span>
+                nee <span class="token operator">=</span> ne<span class="token punctuation">.</span><span class="token builtin">next</span>
+                ne<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> <span class="token boolean">None</span>
+                <span class="token keyword">while</span> p<span class="token punctuation">.</span><span class="token builtin">next</span><span class="token operator">!=</span>ne <span class="token keyword">and</span> p<span class="token punctuation">.</span>val<span class="token operator">&lt;</span>ne<span class="token punctuation">.</span>val<span class="token punctuation">:</span>
+                    p <span class="token operator">=</span> p<span class="token punctuation">.</span><span class="token builtin">next</span>
+                    pre <span class="token operator">=</span> pre<span class="token punctuation">.</span><span class="token builtin">next</span>
+                cur<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> nee<span class="token comment">#把ne删了</span>
+                pre<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> ne
+                ne<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> p
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                cur <span class="token operator">=</span> cur<span class="token punctuation">.</span><span class="token builtin">next</span>
+                <span class="token keyword">continue</span>
+            <span class="token keyword">if</span> cur<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token keyword">and</span> cur<span class="token punctuation">.</span><span class="token builtin">next</span><span class="token punctuation">.</span>val<span class="token operator">></span>cur<span class="token punctuation">.</span>val<span class="token punctuation">:</span>
+                cur <span class="token operator">=</span> cur<span class="token punctuation">.</span><span class="token builtin">next</span>
+        <span class="token keyword">return</span> tmp<span class="token punctuation">.</span><span class="token builtin">next</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="148链表归并排序O-nlog-n"><a href="#148链表归并排序O-nlog-n" class="headerlink" title="148链表归并排序O(nlog(n))"></a>148链表归并排序O(nlog(n))</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">sortList</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> head<span class="token punctuation">:</span> ListNode<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> ListNode<span class="token punctuation">:</span>
+        <span class="token keyword">def</span> <span class="token function">dfs</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token keyword">not</span> p <span class="token keyword">or</span> <span class="token keyword">not</span> p<span class="token punctuation">.</span><span class="token builtin">next</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> p
+            s<span class="token punctuation">,</span>f <span class="token operator">=</span> p<span class="token punctuation">,</span>p<span class="token punctuation">.</span><span class="token builtin">next</span>
+            <span class="token keyword">while</span> f <span class="token keyword">and</span> f<span class="token punctuation">.</span><span class="token builtin">next</span><span class="token punctuation">:</span>
+                s<span class="token punctuation">,</span>f <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token builtin">next</span><span class="token punctuation">,</span>f<span class="token punctuation">.</span><span class="token builtin">next</span><span class="token punctuation">.</span><span class="token builtin">next</span>
+            <span class="token comment"># 截断</span>
+            mid<span class="token punctuation">,</span>s<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token builtin">next</span><span class="token punctuation">,</span><span class="token boolean">None</span>
+            <span class="token comment"># 先把子序列排好</span>
+            l<span class="token punctuation">,</span>r <span class="token operator">=</span> dfs<span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">,</span>dfs<span class="token punctuation">(</span>mid<span class="token punctuation">)</span>
+            h <span class="token operator">=</span> res <span class="token operator">=</span> ListNode<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token keyword">while</span> l <span class="token keyword">and</span> r<span class="token punctuation">:</span>
+                <span class="token keyword">if</span> l<span class="token punctuation">.</span>val<span class="token operator">&lt;</span>r<span class="token punctuation">.</span>val<span class="token punctuation">:</span>
+                    h<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> l
+                    l <span class="token operator">=</span> l<span class="token punctuation">.</span><span class="token builtin">next</span>
+                <span class="token keyword">else</span><span class="token punctuation">:</span>
+                    h<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> r
+                    r <span class="token operator">=</span> r<span class="token punctuation">.</span><span class="token builtin">next</span>
+                h <span class="token operator">=</span> h<span class="token punctuation">.</span><span class="token builtin">next</span>
+            h<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> l <span class="token keyword">if</span> l <span class="token keyword">else</span> r
+            <span class="token keyword">return</span> res<span class="token punctuation">.</span><span class="token builtin">next</span>
+        <span class="token keyword">return</span> dfs<span class="token punctuation">(</span>head<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -771,11 +943,123 @@
 <script type="text/javascript" src="/Blogs/libs/codeBlock/codeShrink.js"></script>
 
 
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/Blogs/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
     
 
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<!-- 代码语言 -->
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<!-- 代码块复制 -->
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+<!-- 代码块收缩 -->
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
+<!-- 代码块折行 -->
+<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
 
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
