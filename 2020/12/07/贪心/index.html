@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CVPR2020-Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery, Leopold">
+    <meta name="keywords" content="贪心, Leopold">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CVPR2020-Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery | Leopold</title>
+    <title>贪心 | Leopold</title>
     <link rel="icon" type="image/jpeg" href="/Blogs/myself.jpg">
 
     <link rel="stylesheet" type="text/css" href="/Blogs/libs/awesome/css/all.css">
@@ -314,12 +314,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/Blogs/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/Blogs/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CVPR2020-Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery</h1>
+                    <h1 class="description center-align post-title">贪心</h1>
                 </div>
             </div>
         </div>
@@ -435,12 +435,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/Blogs/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
-                                <span class="chip bg-color">语义分割</span>
-                            </a>
-                        
-                            <a href="/Blogs/tags/%E9%81%A5%E6%84%9F%E5%9B%BE%E5%83%8F/">
-                                <span class="chip bg-color">遥感图像</span>
+                            <a href="/Blogs/tags/%E8%B4%AA%E5%BF%83/">
+                                <span class="chip bg-color">贪心</span>
                             </a>
                         
                     </div>
@@ -451,8 +447,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                计算机视觉
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                数据结构与算法
                             </a>
                         
                     </div>
@@ -464,7 +460,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-04
+                    2020-12-07
                 </div>
                 
 
@@ -488,11 +484,103 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://cdn.acwing.com/media/article/image/2020/10/26/39715_b495036717-cvpr2020%E9%81%A5%E6%84%9F.PNG" alt="cvpr2020遥感.PNG"><br>*<br>These general semantic segmentation methods mainly focus on multi-scale context modeling, ignoring the special issues in the HSR remote sensing imagery, such as false alarms and foreground-background imbalance. This causes that these methods are lack of explicit modeling for the foreground.<br>*<br>文章提到现有的语义分割方法主要关注多尺度语义建模，忽视了高分辨率遥感图像上前景和背景不平衡导致的误检,所以这篇文章提出了上图的方法<br>*<br>Apart from the pyramidal feature maps vi, a extrabranch is attached on C5 to generate a geospatial scene feature C6 via global context aggregation. For simplicity, we use global average pooling as the aggregation function. C6 is used to model the relation between geospatial scene and foreground<br>*<br>主要思想就是学了一个场景的embedding:$u$,这个$u$是通过resnet作为backbone提到的特征<br>$C_{5}$(维度$ H × W × d_{u} $)全局池化得到的一个$ d_{u} $维向量,对于每个位置$i(row,col)$的前景概率计算:$ $r_{i}= \varphi(u,\widetilde{v_{i}})=u和\widetilde{v_{i}}的内积$</p>
-<p>那么相当于学了一个$d_{u}$维空间里区分前景和背景的基$u$,如果是前景,则$r_{i}$在空间中越靠近$u$这个基所在的方向上,内积响应更大,也就是$r(H×W)$中更红的位置</p>
-<p>下面那一路$k_{w_{i}}(v_{i})$只是一个1×1卷积+Relu 重新对$v_{i}$特征做了一次非线性变换 维度$ H × W × d_{u} 到 H × W × d_{u} $。</p>
-<p>$z_{i}=\frac{1}{1+exp(-r_{i})}×k_{w_{i}}(v_{i})$ 那么刚刚算的$r_{i}\in[0,1]$越大(越接近于1)保留的特征越多，$r_{i}$越小(越接近于0)保留的特征越少,保留的特征范围在$[0.5×k_{w_{i}}(v_{i}),\frac{e}{e+1}×k_{w_{i}}(v_{i})]$</p>
+                <h1 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h1><h2 id="55跳跃游戏-可达性-45跳跃游戏2-最小步"><a href="#55跳跃游戏-可达性-45跳跃游戏2-最小步" class="headerlink" title="55跳跃游戏(可达性)/45跳跃游戏2(最小步)"></a>55跳跃游戏(可达性)/45跳跃游戏2(最小步)</h2><p><code>55 可达性维护一个rmax</code></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">jump</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        rmax <span class="token operator">=</span> <span class="token number">0</span>
+        n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> i<span class="token operator">&lt;=</span>rmax<span class="token punctuation">:</span>
+                rmax <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span>rmax<span class="token punctuation">,</span>i<span class="token operator">+</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> rmax<span class="token operator">>=</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>45 最小步维护3个变量 rmax,end,step</code></p>
+<p><code>到当前end前都维护一个其和前end间的max(rmax,i+nums[i])作为到达当前end后下个end</code></p>
+<pre class="line-numbers language-none"><code class="language-none">相当于最大化每一个end前所能到达的下一个end
+[end1,...,end2,...rmax]
+      i→
+[end1,...,end2,...end3]
+            i    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>当i在end1和end2之间一直更新rmax</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">jump</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
+        rmax<span class="token punctuation">,</span>end<span class="token punctuation">,</span>step <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> i<span class="token operator">&lt;=</span>rmax<span class="token punctuation">:</span>
+                rmax <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span>rmax<span class="token punctuation">,</span>i<span class="token operator">+</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                <span class="token keyword">if</span> i <span class="token operator">==</span> end<span class="token punctuation">:</span>
+                    end <span class="token operator">=</span> rmax
+                    step <span class="token operator">+=</span><span class="token number">1</span>
+        <span class="token keyword">return</span> step<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="406-根据身高重建队列"><a href="#406-根据身高重建队列" class="headerlink" title="406 根据身高重建队列"></a>406 根据身高重建队列</h2><p><code>先按大小降序,再按序号升序,即先把大的放完[7,0][5,0],在同样大的情况下并且先把序号低的放掉[5,0][7,0]</code></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">reconstructQueue</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>people<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        people<span class="token punctuation">.</span>sort<span class="token punctuation">(</span>key <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token operator">-</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> people<span class="token punctuation">:</span>
+            res<span class="token punctuation">.</span>insert<span class="token punctuation">(</span>i<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span>
+            <span class="token comment"># res[i[1]:i[1]] = [i]</span>
+        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="861-反转矩阵后的得分"><a href="#861-反转矩阵后的得分" class="headerlink" title="861 反转矩阵后的得分"></a>861 反转矩阵后的得分</h2><p><code>假设翻转完的顺序无关 则我们可以先翻转行再翻转列,反转行肯定要保证第一个位置是1就越大，翻转列则要保证当列的1的数量&gt;当列的0的数量</code></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">matrixScore</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> A<span class="token punctuation">:</span> List<span class="token punctuation">[</span>List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">,</span>n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>A<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">:</span>
+                <span class="token keyword">continue</span>
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">-</span>A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            cntj1 <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                cntj1<span class="token operator">+=</span><span class="token number">1</span> <span class="token keyword">if</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span>
+            <span class="token keyword">if</span> cntj1<span class="token operator">&lt;=</span>m<span class="token operator">//</span><span class="token number">2</span><span class="token punctuation">:</span>
+                <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">-</span>A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+        res <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                res<span class="token operator">+=</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>j<span class="token punctuation">)</span> <span class="token keyword">if</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token keyword">else</span> <span class="token number">0</span>
+        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="135-分发糖果"><a href="#135-分发糖果" class="headerlink" title="135 分发糖果"></a>135 分发糖果</h2><ul>
+<li>规则定义： 设学生 <code>A</code> 和学生 <code>B</code> 左右相邻，<code>A</code> 在 <code>B</code> 左边；<ul>
+<li><strong>左规则</strong>： 当 $ratings_{B}&gt;ratings_{A}$ $B$的糖比$A$的糖数量多</li>
+<li><strong>右规则</strong>： 当 $ratings_{A}&gt;ratings_{B}$ $A$的糖比$B$的糖数量多</li>
+</ul>
+</li>
+<li><strong>相邻的学生中，评分高的学生必须获得更多的糖果 等价于 所有学生满足左规则且满足右规则。</strong></li>
+</ul>
+<ol>
+<li><p>先从左至右遍历学生成绩 $ratings$，按照以下规则给糖，并记录在 $left$ 中：</p>
+<ol>
+<li>先给所有学生 1 颗糖；</li>
+<li>若 $ratings_{i}&gt;ratings_{i-1}ratings_{i}&gt;ratings_{i−1}$ ，则第 $i$ 名学生糖比第 $i−1$ 名学生多 $1$ 个。</li>
+<li>若 $ratings_i&lt;=ratings_{i-1}ratings_{i}&lt;=ratings_{i−1}$ ，则第 $i$ 名学生糖数量不变。（交由从右向左遍历时处理。）经过此规则分配后，可以保证所有学生糖数量 满足左规则 。</li>
+</ol>
+</li>
+<li><p>同理求一遍$right$</p>
+</li>
+<li><p>则最终$res[i] = max(left[i],right[i])$才能同时满足左规则和右规则</p>
+</li>
+</ol>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">candy</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> ratings<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>ratings<span class="token punctuation">)</span>
+        l<span class="token punctuation">,</span>r <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">*</span>n<span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">*</span>n
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> ratings<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">></span>ratings<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+                l<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>l<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token number">1</span>
+        res <span class="token operator">=</span> l<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token comment">#最后一个一定是由l决定的--不能初始化为0然后再求</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> ratings<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">></span>ratings<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+                r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>r<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token number">1</span>
+            res<span class="token operator">+=</span><span class="token builtin">max</span><span class="token punctuation">(</span>l<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>r<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -518,7 +606,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leopoldacc.github.io/Blogs/Blogs/2020/12/04/CVPR2020-Foreground-Aware%20Relation%20Network%20for%20Geospatial%20Object%20Segmentation%20in%20High%20Spatial%20Resolution%20Remote%20Sensing%20Imagery/">https://leopoldacc.github.io/Blogs/Blogs/2020/12/04/CVPR2020-Foreground-Aware%20Relation%20Network%20for%20Geospatial%20Object%20Segmentation%20in%20High%20Spatial%20Resolution%20Remote%20Sensing%20Imagery/</a>
+                    <a href="https://leopoldacc.github.io/Blogs/Blogs/2020/12/07/%E8%B4%AA%E5%BF%83/">https://leopoldacc.github.io/Blogs/Blogs/2020/12/07/%E8%B4%AA%E5%BF%83/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -556,12 +644,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/Blogs/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
-                                    <span class="chip bg-color">语义分割</span>
-                                </a>
-                            
-                                <a href="/Blogs/tags/%E9%81%A5%E6%84%9F%E5%9B%BE%E5%83%8F/">
-                                    <span class="chip bg-color">遥感图像</span>
+                                <a href="/Blogs/tags/%E8%B4%AA%E5%BF%83/">
+                                    <span class="chip bg-color">贪心</span>
                                 </a>
                             
                         </div>
@@ -731,74 +815,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/Blogs/2020/12/04/CVPR2020-%E7%82%B9%E4%BA%91-GCD+Autoencoder-GraphTER/">
+                <a href="/Blogs/2020/12/07/%E8%B4%AA%E5%BF%83/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/6.jpg" class="responsive-img" alt="CVPR2020-GraphTER-Unsupervised Learning of Graph Transformation Equivariant Representations via Auto-Encoding Node-wise Transformations">
+                        <img src="/Blogs/medias/featureimages/17.jpg" class="responsive-img" alt="贪心">
                         
-                        <span class="card-title">CVPR2020-GraphTER-Unsupervised Learning of Graph Transformation Equivariant Representations via Auto-Encoding Node-wise Transformations</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                    计算机视觉
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/Blogs/tags/%E6%97%A0%E7%9B%91%E7%9D%A3/">
-                        <span class="chip bg-color">无监督</span>
-                    </a>
-                    
-                    <a href="/Blogs/tags/%E5%9B%BE%E5%8D%B7%E7%A7%AF/">
-                        <span class="chip bg-color">图卷积</span>
-                    </a>
-                    
-                    <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
-                        <span class="chip bg-color">点云数据</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/Blogs/2020/12/04/CVPR2020-Foreground-Aware%20Relation%20Network%20for%20Geospatial%20Object%20Segmentation%20in%20High%20Spatial%20Resolution%20Remote%20Sensing%20Imagery/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/Blogs/medias/featureimages/11.jpg" class="responsive-img" alt="CVPR2020-Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery">
-                        
-                        <span class="card-title">CVPR2020-Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery</span>
+                        <span class="card-title">贪心</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -809,14 +837,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                    计算机视觉
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数据结构与算法
                                 </a>
                             
                             
@@ -827,12 +855,61 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
-                        <span class="chip bg-color">语义分割</span>
+                    <a href="/Blogs/tags/%E8%B4%AA%E5%BF%83/">
+                        <span class="chip bg-color">贪心</span>
                     </a>
                     
-                    <a href="/Blogs/tags/%E9%81%A5%E6%84%9F%E5%9B%BE%E5%83%8F/">
-                        <span class="chip bg-color">遥感图像</span>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/Blogs/2020/12/05/%E5%8D%A2%E5%8D%A1%E6%96%AF%E5%AE%9A%E7%90%86/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/Blogs/medias/featureimages/16.jpg" class="responsive-img" alt="lucas定理">
+                        
+                        <span class="card-title">lucas定理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数据结构与算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/Blogs/tags/lucas%E5%AE%9A%E7%90%86/">
+                        <span class="chip bg-color">lucas定理</span>
+                    </a>
+                    
+                    <a href="/Blogs/tags/%E6%95%B0%E5%AD%A6/">
+                        <span class="chip bg-color">数学</span>
                     </a>
                     
                 </div>
