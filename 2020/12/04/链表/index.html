@@ -492,7 +492,7 @@
     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
         self<span class="token punctuation">.</span>val <span class="token operator">=</span> x
         self<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> <span class="token boolean">None</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="92反转链表2"><a href="#92反转链表2" class="headerlink" title="92反转链表2"></a>92反转链表2</h1><p><code>pre:开始反转的前一个节点</code></p>
+<h2 id="92反转链表2"><a href="#92反转链表2" class="headerlink" title="92反转链表2"></a>92反转链表2</h2><p><code>pre:开始反转的前一个节点</code></p>
 <p><code>cur:原链表当前节点</code></p>
 <p><code>ne:原链表下一个节点</code></p>
 <p><code>nx:新链表下一个节点,初始化为第n+1个节点</code></p>
@@ -521,7 +521,7 @@
         pre<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> nx<span class="token comment"># fro:1→2→3→4→5中的1</span>
         <span class="token keyword">return</span> tmp<span class="token punctuation">.</span><span class="token builtin">next</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="链表排序"><a href="#链表排序" class="headerlink" title="链表排序"></a>链表排序</h1><h2 id="147链表插入排序O-n-2"><a href="#147链表插入排序O-n-2" class="headerlink" title="147链表插入排序O(n^2)"></a>147链表插入排序O(n^2)</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+<h2 id="链表排序"><a href="#链表排序" class="headerlink" title="链表排序"></a>链表排序</h2><h2 id="147链表插入排序O-n-2"><a href="#147链表插入排序O-n-2" class="headerlink" title="147链表插入排序O(n^2)"></a>147链表插入排序O(n^2)</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">insertionSortList</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> head<span class="token punctuation">:</span> ListNode<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> ListNode<span class="token punctuation">:</span>
         tmp <span class="token operator">=</span> ListNode<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
         tmp<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> head
