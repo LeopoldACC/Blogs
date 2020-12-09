@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Leopold">
+    <meta name="keywords" content="网络流, Leopold">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Leopold</title>
+    <title>网络流 | Leopold</title>
     <link rel="icon" type="image/jpeg" href="/Blogs/myself.jpg">
 
     <link rel="stylesheet" type="text/css" href="/Blogs/libs/awesome/css/all.css">
@@ -314,12 +314,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/Blogs/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/Blogs/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">网络流</h1>
                 </div>
             </div>
         </div>
@@ -433,12 +433,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/Blogs/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/">
+                                <span class="chip bg-color">网络流</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                数据结构与算法
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -471,42 +484,42 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre class="line-numbers language-none"><code class="language-none">1. 基本概念
-    1.1 流网络，不考虑反向边
-        源点-流量无限的海
-        图的边-河流容量c(u,v)
-        图节点-河流交汇处
-    1.2 可行流，不考虑反向边
-        定义的流量f(u,v)≤c(u,v)
-        1.2.1 两个条件：容量限制、流量守恒
-        1.2.2 可行流的流量指从源点流出的流量 - 流入源点的流量
-        1.2.3 最大流是指最大可行流
-    1.3 残留网络，考虑反向边，残留网络的可行流f&#39; + 原图的可行流f &#x3D; 原题的另一个可行流
-        (1) |f&#39; + f| &#x3D; |f&#39;| + |f|
-        (2) |f&#39;| 可能是负数
-    1.4 增广路径
-    1.5 割
-        1.5.1 割的定义
-        1.5.2 割的容量，不考虑反向边，“最小割”是指容量最小的割。
-        1.5.3 割的流量，考虑反向边，f(S, T) &lt;&#x3D; c(S, T)
-        1.5.4 对于任意可行流f，任意割[S, T]，|f| &#x3D; f(S, T)
-        1.5.5 对于任意可行流f，任意割[S, T]，|f| &lt;&#x3D; c(S, T)
-        1.5.6 最大流最小割定理
-            (1) 可以流f是最大流
-            (2) 可行流f的残留网络中不存在增广路
-            (3) 存在某个割[S, T]，|f| &#x3D; c(S, T)
-    1.6. 算法
-        1.6.1 EK O(nm^2)
-        1.6.2 Dinic O(n^2m)
-    1.7 应用
-        1.7.1 二分图
-            (1) 二分图匹配
-            (2) 二分图多重匹配
-        1.7.2 上下界网络流
-            (1) 无源汇上下界可行流
-            (2) 有源汇上下界最大流
-            (3) 有源汇上下界最小流
-        1.7.3 多源汇最大流<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token number">1</span><span class="token punctuation">.</span> 基本概念
+    <span class="token number">1.1</span> 流网络，不考虑反向边
+        源点<span class="token operator">-</span>流量无限的海
+        图的边<span class="token operator">-</span>河流容量c<span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span>
+        图节点<span class="token operator">-</span>河流交汇处
+    <span class="token number">1.2</span> 可行流，不考虑反向边
+        定义的流量f<span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span>≤c<span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span>
+        <span class="token number">1.2</span><span class="token number">.1</span> 两个条件：容量限制、流量守恒
+        <span class="token number">1.2</span><span class="token number">.2</span> 可行流的流量指从源点流出的流量 <span class="token operator">-</span> 流入源点的流量
+        <span class="token number">1.2</span><span class="token number">.3</span> 最大流是指最大可行流
+    <span class="token number">1.3</span> 残留网络，考虑反向边，残留网络的可行流f' <span class="token operator">+</span> 原图的可行流f <span class="token operator">=</span> 原题的另一个可行流
+        <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">|</span><span class="token string-interpolation"><span class="token string">f' + f| = |f'</span></span><span class="token operator">|</span> <span class="token operator">+</span> <span class="token operator">|</span>f<span class="token operator">|</span>
+        <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">|</span>f'<span class="token operator">|</span> 可能是负数
+    <span class="token number">1.4</span> 增广路径
+    <span class="token number">1.5</span> 割
+        <span class="token number">1.5</span><span class="token number">.1</span> 割的定义
+        <span class="token number">1.5</span><span class="token number">.2</span> 割的容量，不考虑反向边，“最小割”是指容量最小的割。
+        <span class="token number">1.5</span><span class="token number">.3</span> 割的流量，考虑反向边，f<span class="token punctuation">(</span>S<span class="token punctuation">,</span> T<span class="token punctuation">)</span> <span class="token operator">&lt;=</span> c<span class="token punctuation">(</span>S<span class="token punctuation">,</span> T<span class="token punctuation">)</span>
+        <span class="token number">1.5</span><span class="token number">.4</span> 对于任意可行流f，任意割<span class="token punctuation">[</span>S<span class="token punctuation">,</span> T<span class="token punctuation">]</span>，<span class="token operator">|</span>f<span class="token operator">|</span> <span class="token operator">=</span> f<span class="token punctuation">(</span>S<span class="token punctuation">,</span> T<span class="token punctuation">)</span>
+        <span class="token number">1.5</span><span class="token number">.5</span> 对于任意可行流f，任意割<span class="token punctuation">[</span>S<span class="token punctuation">,</span> T<span class="token punctuation">]</span>，<span class="token operator">|</span>f<span class="token operator">|</span> <span class="token operator">&lt;=</span> c<span class="token punctuation">(</span>S<span class="token punctuation">,</span> T<span class="token punctuation">)</span>
+        <span class="token number">1.5</span><span class="token number">.6</span> 最大流最小割定理
+            <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> 可以流f是最大流
+            <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> 可行流f的残留网络中不存在增广路
+            <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> 存在某个割<span class="token punctuation">[</span>S<span class="token punctuation">,</span> T<span class="token punctuation">]</span>，<span class="token operator">|</span>f<span class="token operator">|</span> <span class="token operator">=</span> c<span class="token punctuation">(</span>S<span class="token punctuation">,</span> T<span class="token punctuation">)</span>
+    <span class="token number">1.6</span><span class="token punctuation">.</span> 算法
+        <span class="token number">1.6</span><span class="token number">.1</span> EK O<span class="token punctuation">(</span>nm<span class="token operator">^</span><span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token number">1.6</span><span class="token number">.2</span> Dinic O<span class="token punctuation">(</span>n<span class="token operator">^</span>2m<span class="token punctuation">)</span>
+    <span class="token number">1.7</span> 应用
+        <span class="token number">1.7</span><span class="token number">.1</span> 二分图
+            <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> 二分图匹配
+            <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> 二分图多重匹配
+        <span class="token number">1.7</span><span class="token number">.2</span> 上下界网络流
+            <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> 无源汇上下界可行流
+            <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> 有源汇上下界最大流
+            <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> 有源汇上下界最小流
+        <span class="token number">1.7</span><span class="token number">.3</span> 多源汇最大流<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -569,7 +582,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/Blogs/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/">
+                                    <span class="chip bg-color">网络流</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -737,18 +754,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/Blogs/2020/12/08/%E7%BD%91%E7%BB%9C%E6%B5%81/">
+                <a href="/Blogs/2020/12/09/HRNet-OCR%20Pytorch%E7%AE%80%E6%98%93%E7%89%88%E5%AE%9E%E7%8E%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="HRNet-OCR by Pytorch">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">HRNet-OCR by Pytorch</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -758,18 +774,33 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-08
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-09
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Leopold
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
+                                    计算机视觉
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/Blogs/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+                        <span class="chip bg-color">语义分割</span>
+                    </a>
+                    
+                    <a href="/Blogs/tags/SOTA/">
+                        <span class="chip bg-color">SOTA</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -950,6 +981,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
 
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
