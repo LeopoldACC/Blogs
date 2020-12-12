@@ -488,7 +488,23 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="集合类状态压缩动态规划"><a href="#集合类状态压缩动态规划" class="headerlink" title="集合类状态压缩动态规划"></a>集合类状态压缩动态规划</h1><h2 id="acwing91-最短Hamilton路径-旅行商问题"><a href="#acwing91-最短Hamilton路径-旅行商问题" class="headerlink" title="acwing91 最短Hamilton路径(旅行商问题)"></a>acwing91 最短Hamilton路径(旅行商问题)</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token number">1</span> 注意<span class="token operator">+</span><span class="token operator">-</span>的优先级大于位运算
+                <p><strong>看到题目有什么特点可以用状压？</strong></p>
+<details>
+<summary>提示1</summary>
+<pre><code>
+集合类状压
+可以用比较少(小于30)的集合表示当前某些数/物品 用(多少)/没用 的状态
+</code></pre>
+</details>
+<details>
+<summary>提示2</summary>
+<pre><code>
+连通类状压
+棋盘/树(长或宽小于30)中按某种规则放置固定长度的 物品
+</code></pre>
+</details>
+
+<h2 id="集合类状态压缩动态规划"><a href="#集合类状态压缩动态规划" class="headerlink" title="集合类状态压缩动态规划"></a>集合类状态压缩动态规划</h2><h2 id="acwing91-最短Hamilton路径-旅行商问题"><a href="#acwing91-最短Hamilton路径-旅行商问题" class="headerlink" title="acwing91 最短Hamilton路径(旅行商问题)"></a>acwing91 最短Hamilton路径(旅行商问题)</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token number">1</span> 注意<span class="token operator">+</span><span class="token operator">-</span>的优先级大于位运算
 <span class="token number">2</span> <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span><span class="token operator">>></span>k <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">//</span>从状态i中去掉点j后 的集合<span class="token punctuation">(</span>i<span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span><span class="token punctuation">)</span>中包含点k<span class="token punctuation">(</span>i<span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span><span class="token operator">>></span>k <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span> 
 则能从点k走到点j从而从状态f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token operator">+</span>w<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span>到达状态f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span>
 f<span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">[</span>state_k<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token operator">+</span>weight<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token punctuation">,</span> state_k <span class="token operator">=</span> state集合除掉j之后的子集 state_k包含点k
@@ -720,6 +736,461 @@ j代表当前停在哪个点上<span class="token operator">-</span><span class=
                         <span class="token keyword">break</span>
         <span class="token comment"># f[1&lt;&lt;len(nums)-1] = 用掉所有数之后且在状态转移过程中一直满足我们的约束</span>
         <span class="token keyword">return</span> f<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="leetcode-847-访问所有节点的最短路径"><a href="#leetcode-847-访问所有节点的最短路径" class="headerlink" title="leetcode 847 访问所有节点的最短路径"></a>leetcode 847 访问所有节点的最短路径</h2><p>给出<code>graph</code>为有 <code>N</code> 个节点（编号为<code>0, 1, 2, ..., N-1</code>）的无向连通图。</p>
+<p><code>graph.length = N</code>，且只有节点 <code>i</code>和 <code>j</code>连通时，<code>j != i</code>在列表<code>graph[i]</code>中恰好出现一次。</p>
+<p>返回能够访问所有节点的最短路径的长度。你可以在任一节点开始和停止，也可以多次重访节点，并且可以重用边。</p>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h3><pre class="line-numbers language-none"><code class="language-none">输入：[[1,2,3],[0],[0],[0]]
+输出：4
+解释：一个可能的路径为 [1,0,2,0,3]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="数据范围-2"><a href="#数据范围-2" class="headerlink" title="数据范围"></a>数据范围</h3><ul>
+<li> <code>1 &lt;= graph.length &lt;= 12</code></li>
+<li> <code>0 &lt;= graph[i].length &lt; graph.length</code></li>
+</ul>
+<h3 id="最短路-二进制状态表示"><a href="#最短路-二进制状态表示" class="headerlink" title="最短路 二进制状态表示"></a>最短路 二进制状态表示</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">shortestPathLength</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> graph<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>graph<span class="token punctuation">)</span>
+        queue <span class="token operator">=</span> collections<span class="token punctuation">.</span>deque<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> x<span class="token punctuation">,</span> x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        dist <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token builtin">float</span><span class="token punctuation">(</span><span class="token string">'inf'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">*</span>n <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>dist<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+
+        <span class="token keyword">while</span> queue<span class="token punctuation">:</span>
+            state<span class="token punctuation">,</span> cur <span class="token operator">=</span> queue<span class="token punctuation">.</span>popleft<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            d <span class="token operator">=</span> dist<span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">[</span>cur<span class="token punctuation">]</span>
+            <span class="token keyword">if</span> state <span class="token operator">==</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">:</span> <span class="token keyword">return</span> d
+            <span class="token keyword">for</span> ne <span class="token keyword">in</span> graph<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                state_ne <span class="token operator">=</span> state <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> ne<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> d <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&lt;</span> dist<span class="token punctuation">[</span>state_ne<span class="token punctuation">]</span><span class="token punctuation">[</span>ne<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    dist<span class="token punctuation">[</span>state_ne<span class="token punctuation">]</span><span class="token punctuation">[</span>ne<span class="token punctuation">]</span> <span class="token operator">=</span> d <span class="token operator">+</span> <span class="token number">1</span>
+                    queue<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>state_ne<span class="token punctuation">,</span>ne<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="状压dp-1"><a href="#状压dp-1" class="headerlink" title="状压dp"></a>状压dp</h3><ul>
+<li>状态表示<br>  $f[state][i]$遍历过的节点集合$state$,落在点$i$上时最短路径长度</li>
+<li>状态转移<br>  松弛$f[state|ne][ne] = f[state][cur]+1 \quad if \quad f[state][cur]+1 &lt;f[state|ne][ne]$</li>
+</ul>
+<p>假如说$state==state_{ne}$ 则说明$ne$在访问节点集合(已经被松弛更新过的点才会在$state$中)中,<br>且通过$ne$使得状态$state$有更短路,则需要重新对$state$所有点更新一遍确保更新ne后遍历顺序在ne前的点没有漏更新</p>
+<p>比如<code>example1</code>的<code>[1,0,2,0,3]，1,0,2,0</code>和<code>1,0,2</code>对应状态一样都是<code>7(111)</code>，但是<code>1,0,2,0</code>是由<code>1,0,2</code>转移过来的，它们状态都是<code>7</code>，即$dp[7][0]$其实等于$dp[7][2]+1$。如果你只求一遍（即<code>while(repeat)</code>循环），就可能会导致你用$dp[7][2]$更新完$dp[7][0]$，你又有了新的$dp[7][0]$值，但是用$dp[7][0]$扩展路径的那一步循环已经过去了，你没有对$dp[7][0]$进行扩展，可能会漏掉一些路径。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">shortestPathLength</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> graph<span class="token punctuation">:</span> List<span class="token punctuation">[</span>List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>graph<span class="token punctuation">)</span>
+        dist <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token builtin">float</span><span class="token punctuation">(</span><span class="token string">'inf'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">*</span>n <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token comment"># 从点i出发且只经过i的路径长度初始化为0</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            dist<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span>
+        
+        <span class="token keyword">for</span> state <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            repeat <span class="token operator">=</span> <span class="token boolean">True</span>
+            <span class="token keyword">while</span> repeat<span class="token punctuation">:</span>
+                repeat <span class="token operator">=</span> <span class="token boolean">False</span>
+                <span class="token keyword">for</span> cur<span class="token punctuation">,</span>d <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>dist<span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    <span class="token keyword">for</span> ne <span class="token keyword">in</span> graph<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                        state_ne <span class="token operator">=</span> state <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>ne<span class="token punctuation">)</span>
+                        <span class="token keyword">if</span> d<span class="token operator">+</span><span class="token number">1</span><span class="token operator">&lt;</span>dist<span class="token punctuation">[</span>state_ne<span class="token punctuation">]</span><span class="token punctuation">[</span>ne<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                            dist<span class="token punctuation">[</span>state_ne<span class="token punctuation">]</span><span class="token punctuation">[</span>ne<span class="token punctuation">]</span> <span class="token operator">=</span> d<span class="token operator">+</span><span class="token number">1</span>
+                            <span class="token keyword">if</span> state <span class="token operator">==</span> state_ne<span class="token punctuation">:</span>
+                                repeat <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token comment"># 答案 从点i作为终点且经过所有点的路径长度最小值</span>
+        <span class="token keyword">return</span> <span class="token builtin">min</span><span class="token punctuation">(</span>dist<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="leetcode-943-最短超级串"><a href="#leetcode-943-最短超级串" class="headerlink" title="leetcode 943 最短超级串"></a>leetcode 943 最短超级串</h2><p>给定一个字符串数组 <code>A</code>，找到以 <code>A</code> 中每个字符串作为子字符串的最短字符串。</p>
+<p>我们可以假设 <code>A</code> 中没有字符串是 <code>A</code> 中另一个字符串的子字符串。</p>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例:"></a>示例:</h3><pre class="line-numbers language-none"><code class="language-none">输入：[&quot;alex&quot;,&quot;loves&quot;,&quot;leetcode&quot;]
+输出：&quot;alexlovesleetcode&quot;
+解释：&quot;alex&quot;，&quot;loves&quot;，&quot;leetcode&quot; 的所有排列都会被接受。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="数据范围-3"><a href="#数据范围-3" class="headerlink" title="数据范围"></a>数据范围</h3><ul>
+<li>1.<code>1 &lt;= A.length &lt;= 12</code></li>
+<li>2.<code>1 &lt;= A[i].length &lt;= 20</code></li>
+</ul>
+<h3 id="状压dp-2"><a href="#状压dp-2" class="headerlink" title="状压dp"></a>状压dp</h3><p>最终拼接的结果一定是累计重叠长度最长的情况<br>因此我们可以对<code>A</code>中每对第<code>i</code>、第<code>j</code>个字符串计算重叠长度<code>overlaps[i][j]</code></p>
+<ul>
+<li>状态表示<br>  $f[state][cur]$:当前接到总串尾巴上的是$A[cur]$,当前A数组总共用的状态为$state$的最大累计重叠长度</li>
+<li>状态转移<br>  $f[state^pre][pre] = f[state][cur] + overlaps[pre][cur] \quad if 更新后&gt;更新前$<br>  同时维护一个$pre[state][cur]$作为当前用掉的字符串下标的集合$state$,最后一个接上的字符串下标$cur$时累计最大的前继下标</li>
+</ul>
+<h3 id="答案-1"><a href="#答案-1" class="headerlink" title="答案"></a>答案</h3><ul>
+<li> 则我们需要取用掉$n$个字符串后累计重叠长度最长时最后用到的字符串$idx\quad of \quad max(f[(1&lt;&lt;n)-1])$,通过$idx_{maxsums}$倒序向前推得有更新$sums_overlaps$的节点并加入拼接顺序列表$order$,同时考虑到有一部分字符串之间是没有重叠的,那么就得再用一个状态数组$st$记录加入$order$的字符串,对于没有加入的(与其他字符串无重叠的)字符串可以任意拼接至尾部</li>
+<li> 对$order$中的字符串进行拼接,因为我们有$overlaps[i-1][i]$,所以$order[i] = order[i][overlaps[i-1][i]:]$<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">shortestSuperstring</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> A<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">str</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span>
+
+        overlaps <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span>n <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> i<span class="token punctuation">,</span>x <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> j<span class="token punctuation">,</span>y <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> i<span class="token operator">==</span>j<span class="token punctuation">:</span><span class="token keyword">continue</span>
+                <span class="token keyword">for</span> ans <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">min</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                    <span class="token keyword">if</span> x<span class="token punctuation">.</span>endswith<span class="token punctuation">(</span>y<span class="token punctuation">[</span><span class="token punctuation">:</span>ans<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        overlaps<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> ans
+                        <span class="token keyword">break</span>
+
+        f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span>n <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span>
+        pre <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token boolean">None</span><span class="token punctuation">]</span><span class="token operator">*</span>n <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> state <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>state<span class="token operator">>></span>i<span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">:</span>
+                    state_pre <span class="token operator">=</span> state<span class="token operator">^</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>i<span class="token punctuation">)</span>
+                    <span class="token keyword">if</span> state_pre<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token keyword">continue</span>
+                    <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>state_pre<span class="token operator">>></span>j<span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">:</span>
+                            <span class="token comment"># 累计重叠长度越大越好</span>
+                            val <span class="token operator">=</span> f<span class="token punctuation">[</span>state_pre<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">+</span>overlaps<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+                            <span class="token comment"># 选累计重叠长度最大的j作为前缀</span>
+                            <span class="token keyword">if</span> val<span class="token operator">></span>f<span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                                f<span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> val
+                                pre<span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> j
+
+        <span class="token comment"># 根据最大累计重叠长度的前缀得到拼接顺序</span>
+        order <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        state <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span>
+        i <span class="token operator">=</span> f<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>index<span class="token punctuation">(</span><span class="token builtin">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#i = max(xrange(N), key = dp[-1].__getitem__)</span>
+        <span class="token keyword">while</span> i <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span><span class="token comment">#为什么是not None 而不能while i:?因为i如果是0时 是有可能有pre[state][0]的 这种情况就会导致while循环提前停止</span>
+            order<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+            state<span class="token punctuation">,</span>i <span class="token operator">=</span> state<span class="token operator">^</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span>pre<span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+
+        order <span class="token operator">=</span> order<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
+        st <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token boolean">False</span><span class="token punctuation">]</span><span class="token operator">*</span>n
+
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> order<span class="token punctuation">:</span>
+            st<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token boolean">True</span>
+        <span class="token comment"># order.extend([i for i in xrange(N) if not seen[i]])</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token keyword">not</span> st<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                order<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">)</span> 
+        res <span class="token operator">=</span> <span class="token punctuation">[</span>A<span class="token punctuation">[</span>order<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>order<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            overlap <span class="token operator">=</span> overlaps<span class="token punctuation">[</span>order<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">[</span>order<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span>
+            res<span class="token punctuation">.</span>append<span class="token punctuation">(</span>A<span class="token punctuation">[</span>order<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">[</span>overlap<span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>res<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+</li>
+</ul>
+<h2 id="leetcode-526-优美的排列"><a href="#leetcode-526-优美的排列" class="headerlink" title="leetcode 526 优美的排列"></a>leetcode 526 优美的排列</h2><p>假设有从 <code>1</code> 到 <code>N</code> 的<code>N</code>个整数，如果从这<code>N</code>个数字中成功构造出一个数组，使得数组的第 <code>i</code>位 <code>(1 &lt;= i &lt;= N)</code> 满足如下两个条件中的一个，我们就称这个数组为一个优美的排列。条件：</p>
+<p>第<code>i</code>位的数字能被<code>i</code>整除<br><code>i</code> 能被第 <code>i</code> 位上的数字整除<br>现在给定一个整数 <code>N</code>，请问可以构造多少个优美的排列？</p>
+<h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例:"></a>示例:</h3><pre class="line-numbers language-none"><code class="language-none">输入: 2
+输出: 2
+解释: 
+
+第 1 个优美的排列是 [1, 2]:
+  第 1 个位置（i&#x3D;1）上的数字是1，1能被 i（i&#x3D;1）整除
+  第 2 个位置（i&#x3D;2）上的数字是2，2能被 i（i&#x3D;2）整除
+
+第 2 个优美的排列是 [2, 1]:
+  第 1 个位置（i&#x3D;1）上的数字是2，2能被 i（i&#x3D;1）整除
+  第 2 个位置（i&#x3D;2）上的数字是1，i（i&#x3D;2）能被 1 整除<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="数据范围-4"><a href="#数据范围-4" class="headerlink" title="数据范围"></a>数据范围</h3><ul>
+<li>1.<code>N</code> 是一个正整数，并且不会超过<code>15</code>。</li>
+</ul>
+<h3 id="状压dp-3"><a href="#状压dp-3" class="headerlink" title="状压dp"></a>状压dp</h3><ul>
+<li>状态表示<br>  $f[state][i]$代表当前已经排好的集合$state$,以及当前序列最后一个数是$i$</li>
+<li>状态转移<br>  $通过cnt1(state)$计算一个二进制数中1的个数得到当前序列长度,则新加入序列的$ne$在序列中的就是第$cnt1(state)+1$个<br>  同时需要满足优美排列<br>  $ne%(cnt1(state)+1)==0或(cnt1(state)+1)%ne==0$时<br>  $f[state|ne][ne] +=f[state][cur]$</li>
+</ul>
+<h3 id="答案-2"><a href="#答案-2" class="headerlink" title="答案"></a>答案</h3><p>以任意一个数作为序列结尾,序列中包含所有<code>1~N</code>中的数的方案数之和<br>$\sum_{i=1}^{N}f[(1&lt;&lt;N)-1][i]$</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">countArrangement</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> N<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span>N <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>N<span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token keyword">def</span> <span class="token function">cnt1</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            res <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword">while</span> x<span class="token punctuation">:</span>
+                x <span class="token operator">-=</span> x<span class="token operator">&amp;</span><span class="token operator">-</span>x
+                res<span class="token operator">+=</span><span class="token number">1</span>
+            <span class="token keyword">return</span> res
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            f<span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span>
+        
+        <span class="token keyword">for</span> state <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>N<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> cur <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>state<span class="token operator">>></span>cur<span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">:</span>
+                    <span class="token keyword">for</span> ne <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token keyword">if</span> cur<span class="token operator">==</span>ne <span class="token keyword">or</span> <span class="token punctuation">(</span>state<span class="token operator">>></span>ne<span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token keyword">continue</span>
+                        idx <span class="token operator">=</span> cnt1<span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>ne<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span>idx<span class="token operator">==</span><span class="token number">0</span> <span class="token keyword">or</span> idx<span class="token operator">%</span><span class="token punctuation">(</span>ne<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">:</span>
+                            f<span class="token punctuation">[</span>state<span class="token operator">|</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>ne<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">[</span>ne<span class="token punctuation">]</span><span class="token operator">+=</span>f<span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">[</span>cur<span class="token punctuation">]</span> <span class="token comment">#状态state最后一个是第i个      </span>
+        res <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            res<span class="token operator">+=</span>f<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>N<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> 
+        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="leetcode-935-骑士拨号器"><a href="#leetcode-935-骑士拨号器" class="headerlink" title="leetcode 935 骑士拨号器"></a>leetcode 935 骑士拨号器</h2><p>骑士可以按$ne$所示进行移动：<br>$ne = [[4,6],[6,8],[7,9],[4,8],[3,9,0],[],[1,7,0],[2,6],[1,3],[2,4]]$<br>这一次，我们将“骑士” 放在电话拨号盘的任意数字键（如上图所示）上，接下来，骑士将会跳<code>N-1</code> 步。每一步必须是从一个数字键跳到另一个数字键。</p>
+<p>每当它落在一个键上（包括骑士的初始位置），都会拨出键所对应的数字，总共按下<code>N</code> 位数字。</p>
+<p>你能用这种方式拨出多少个不同的号码？</p>
+<p>因为答案可能很大，所以输出答案模<code>10^9 + 7</code>。</p>
+<h3 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h3><pre class="line-numbers language-none"><code class="language-none">输入：1
+输出：10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="数据范围-5"><a href="#数据范围-5" class="headerlink" title="数据范围"></a>数据范围</h3><ul>
+<li><code>1 &lt;= N &lt;= 5000</code></li>
+</ul>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>因为每个位置$i$除第一次放置外只能由去确定的$ne[i]$的位置</p>
+<ul>
+<li>状态表示<br>  $f[i]$ 第$i$次跳完后跳到位置$i$的方案数</li>
+<li>状态转移<br>  $f[ne[i]] += f[i]$</li>
+</ul>
+<h3 id="答案-3"><a href="#答案-3" class="headerlink" title="答案"></a>答案</h3><p>跳$n$次后落在$0~9$中每个数的方案数之和<br>$\sum_{i=0}^{9}f[i]$</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">knightDialer</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        ne <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+        f1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">10</span>
+        mod <span class="token operator">=</span> <span class="token number">1e9</span><span class="token operator">+</span><span class="token number">7</span>
+        <span class="token keyword">for</span> ep <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token comment">#我们已经放了一次在初始位置了 所以只需要循环n-1次</span>
+            f2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">10</span>
+            <span class="token keyword">for</span> idx<span class="token punctuation">,</span>pre <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>f1<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">for</span> nei <span class="token keyword">in</span> ne<span class="token punctuation">[</span>idx<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    f2<span class="token punctuation">[</span>nei<span class="token punctuation">]</span><span class="token operator">+=</span>pre
+                    f2<span class="token punctuation">[</span>nei<span class="token punctuation">]</span><span class="token operator">%=</span>mod
+            f1 <span class="token operator">=</span> f2
+        <span class="token keyword">return</span> <span class="token builtin">int</span><span class="token punctuation">(</span><span class="token builtin">sum</span><span class="token punctuation">(</span>f1<span class="token punctuation">)</span><span class="token operator">%</span>mod<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="leetcode-1255-得分最高的单词集合"><a href="#leetcode-1255-得分最高的单词集合" class="headerlink" title="leetcode 1255 得分最高的单词集合"></a>leetcode 1255 得分最高的单词集合</h2><p>你将会得到一份单词表<code>words</code>，一个字母表<code>letters</code>（可能会有重复字母），以及每个字母对应的得分情况表<code>score</code>。</p>
+<p>请你帮忙计算玩家在单词拼写游戏中所能获得的「最高得分」：能够由<code>letters</code>里的字母拼写出的任意属于 <code>words</code>单词子集中，分数最高的单词集合的得分。</p>
+<p>单词拼写游戏的规则概述如下：</p>
+<ul>
+<li><p>玩家需要用字母表<code>letters</code> 里的字母来拼写单词表<code>words</code>中的单词。</p>
+</li>
+<li><p>可以只使用字母表<code>letters</code> 中的部分字母，但是每个字母最多被使用一次。</p>
+</li>
+<li><p>单词表 <code>words</code>中每个单词只能计分（使用）一次。</p>
+</li>
+<li><p>根据字母得分情况表<code>score</code>，字母 <code>&#39;a&#39;,&#39;b&#39;,&#39;c&#39;, ... ,&#39;z&#39;</code> 对应的得分分别为 <code>score[0], score[1],...,score[25]</code>。</p>
+</li>
+<li><p>本场游戏的「得分」是指：玩家所拼写出的单词集合里包含的所有字母的得分之和。</p>
+</li>
+</ul>
+<h3 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a>示例</h3><pre class="line-numbers language-none"><code class="language-none">输入：words &#x3D; [&quot;dog&quot;,&quot;cat&quot;,&quot;dad&quot;,&quot;good&quot;], letters &#x3D; [&quot;a&quot;,&quot;a&quot;,&quot;c&quot;,&quot;d&quot;,&quot;d&quot;,&quot;d&quot;,&quot;g&quot;,&quot;o&quot;,&quot;o&quot;], score &#x3D; [1,0,9,5,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0]
+输出：23
+解释：
+字母得分为  a&#x3D;1, c&#x3D;9, d&#x3D;5, g&#x3D;3, o&#x3D;2
+使用给定的字母表 letters，我们可以拼写单词 &quot;dad&quot; (5+1+5)和 &quot;good&quot; (3+2+2+5)，得分为 23 。
+而单词 &quot;dad&quot; 和 &quot;dog&quot; 只能得到 21 分。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="数据范围-6"><a href="#数据范围-6" class="headerlink" title="数据范围"></a>数据范围</h3><ul>
+<li><code>1 &lt;= words.length &lt;= 14</code></li>
+<li><code>1 &lt;= words[i].length &lt;= 15</code></li>
+<li><code>1 &lt;= letters.length &lt;= 100</code></li>
+<li><code>letters[i].length == 1</code></li>
+<li><code>score.length ==26</code></li>
+<li><code>0 &lt;= score[i] &lt;= 10</code></li>
+<li><code>words[i]和letters[i]只包含小写的英文字母。</code></li>
+</ul>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>状态表示<br>  $state$:用了$words$中各个单词的状态<br>  遍历$1 \sim (1&lt;&lt;n)$每个状态$cur$计算不同字母个数 及状态对应的分数$score(cur)$<br>  合法状态需要满足$cur$中每个字母$\leq$给定的字母表$letters$中每个字母的个数</li>
+</ul>
+<h3 id="答案-4"><a href="#答案-4" class="headerlink" title="答案"></a>答案</h3><p>$max(score(state)) 对所有合法状态state$</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">maxScoreWords</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> words<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">,</span> letters<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">,</span> score<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>words<span class="token punctuation">)</span>
+        wordscore <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span>n
+        wordchar <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">26</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span>
+        letterchar <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">26</span>
+        <span class="token keyword">for</span> ch <span class="token keyword">in</span> letters<span class="token punctuation">:</span>
+            letterchar<span class="token punctuation">[</span><span class="token builtin">ord</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token operator">-</span><span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">+=</span><span class="token number">1</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            word <span class="token operator">=</span> words<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+            <span class="token keyword">for</span> ch <span class="token keyword">in</span> word<span class="token punctuation">:</span>
+                wordscore<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">+=</span>score<span class="token punctuation">[</span><span class="token builtin">ord</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token operator">-</span><span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+                wordchar<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token builtin">ord</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token operator">-</span><span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token operator">+=</span><span class="token number">1</span>
+        res <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token comment"># 遍历每个状态</span>
+        <span class="token keyword">for</span> cur <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            tot <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">26</span>
+            curscore <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token comment"># 遍历cur中位为1的用到的word[j] 累加wordscore[j] 计算cur的分数</span>
+            <span class="token comment"># 并统计以及状态cur中26个字母各自的个数tot[]</span>
+            j<span class="token operator">=</span><span class="token number">0</span>
+            <span class="token keyword">while</span> cur<span class="token operator">></span><span class="token number">0</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> cur<span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">:</span>
+                    <span class="token keyword">for</span> k <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">26</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        tot<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token operator">+=</span>wordchar<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span>
+                    curscore<span class="token operator">+=</span>wordscore<span class="token punctuation">[</span>j<span class="token punctuation">]</span>
+                cur<span class="token operator">>></span><span class="token operator">=</span><span class="token number">1</span>
+                j<span class="token operator">+=</span><span class="token number">1</span>
+            <span class="token comment"># 遍历cur的每个字母个数tot[i] 需要tot[i]&lt;=letterchar[i] 我们能用的字母集合letters中每个字母的个数</span>
+            flag <span class="token operator">=</span> <span class="token boolean">True</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">26</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> tot<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">></span>letterchar<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    flag <span class="token operator">=</span> <span class="token boolean">False</span>
+                    <span class="token keyword">break</span>
+            <span class="token keyword">if</span> flag<span class="token punctuation">:</span>
+                res <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span>curscore<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="leetcode-1125-最小的必要团队"><a href="#leetcode-1125-最小的必要团队" class="headerlink" title="leetcode 1125 最小的必要团队"></a>leetcode 1125 最小的必要团队</h2><p>作为项目经理，你规划了一份需求的技能清单<code>req_skills</code>，并打算从备选人员名单<code>people</code>中选出些人组成一个「必要团队」（ 编号为<code>i</code>的备选人员<code>people[i]</code>含有一份该备选人员掌握的技能列表）。</p>
+<p>所谓「必要团队」，就是在这个团队中，对于所需求的技能列表<code>req_skills</code> 中列出的每项技能，团队中至少有一名成员已经掌握。</p>
+<p>我们可以用每个人的编号来表示团队中的成员：例如，团队<code>team = [0, 1, 3]</code>表示掌握技能分别为<code>people[0]，people[1]</code>，和<code>people[3]</code>的备选人员。</p>
+<p>请你返回 任一规模最小的必要团队，团队成员用人员编号表示。你可以按任意顺序返回答案，本题保证答案存在。</p>
+<h3 id="示例-6"><a href="#示例-6" class="headerlink" title="示例"></a>示例</h3><pre class="line-numbers language-none"><code class="language-none">输入：req_skills &#x3D; [&quot;java&quot;,&quot;nodejs&quot;,&quot;reactjs&quot;], people &#x3D; [[&quot;java&quot;],[&quot;nodejs&quot;],[&quot;nodejs&quot;,&quot;reactjs&quot;]]
+输出：[0,2]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="数据范围-7"><a href="#数据范围-7" class="headerlink" title="数据范围"></a>数据范围</h3><ul>
+<li><code>1 &lt;= req_skills.length &lt;= 16</code></li>
+<li><code>1 &lt;= people.length &lt;= 60</code></li>
+<li><code>1 &lt;= people[i].length, req_skills[i].length, people[i][j].length&lt;= 16</code></li>
+<li><code>req_skills和people[i]中的元素分别各不相同</code></li>
+<li><code>req_skills[i][j], people[i][j][k]都由小写英文字母组成</code></li>
+<li><code>本题保证「必要团队」一定存在</code></li>
+</ul>
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><ul>
+<li><p>状态表示<br>  $f[state]$为技能满足状态为$state$时需要的最少人数数组</p>
+</li>
+<li><p>状态转移<br>  遍历$people$中的每个人</p>
+<p>  遍历$0~(1&lt;&lt;n)-1$每个状态$cur$,则$cur$加上$people[i]$能到的下一个状态为$ne=cur|skill(people[i])$</p>
+<p>  $f[ne] = f[state] + [i] (满足条件时转移:如果ne现在最少人数&gt;cur最少人数+1)$</p>
+</li>
+</ul>
+<h3 id="答案-5"><a href="#答案-5" class="headerlink" title="答案"></a>答案</h3><p>所有技能都被满足时的最少人数数组<br>$f[(1&lt;&lt;n)-1]$</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">smallestSufficientTeam</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> req_skills<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">,</span> people<span class="token punctuation">:</span> List<span class="token punctuation">[</span>List<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>req_skills<span class="token punctuation">)</span>
+        f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">list</span><span class="token punctuation">(</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>people<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">]</span>
+        f<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token comment"># 把技能映射为 状态</span>
+        state <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            state<span class="token punctuation">[</span>req_skills<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>i
+        
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>people<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            skill <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword">for</span> s <span class="token keyword">in</span> people<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                skill<span class="token operator">|</span><span class="token operator">=</span>state<span class="token punctuation">[</span>s<span class="token punctuation">]</span>
+            <span class="token keyword">for</span> cur<span class="token punctuation">,</span>cur_ls <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>f<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                ne <span class="token operator">=</span> cur<span class="token operator">|</span>skill
+                <span class="token keyword">if</span> ne<span class="token operator">!=</span>cur <span class="token keyword">and</span> <span class="token builtin">len</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>ne<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token builtin">len</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">:</span>
+                    f<span class="token punctuation">[</span>ne<span class="token punctuation">]</span><span class="token operator">=</span>cur_ls<span class="token operator">+</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">return</span> f<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="leetcode-1434-每个人戴不同帽子的方案数"><a href="#leetcode-1434-每个人戴不同帽子的方案数" class="headerlink" title="leetcode 1434 每个人戴不同帽子的方案数"></a>leetcode 1434 每个人戴不同帽子的方案数</h2><p>总共有 <code>n</code>个人和 <code>40</code> 种不同的帽子，帽子编号从 <code>1</code> 到 <code>40</code> 。</p>
+<p>给你一个整数列表的列表<code>hats</code>，其中<code>hats[i]</code>是第 `i个人所有喜欢帽子的列表。</p>
+<p>请你给每个人安排一顶他喜欢的帽子，确保每个人戴的帽子跟别人都不一样，并返回方案数。</p>
+<p>由于答案可能很大，请返回它对<code>10^9 + 7</code>取余后的结果。</p>
+<h3 id="示例-7"><a href="#示例-7" class="headerlink" title="示例"></a>示例</h3><pre class="line-numbers language-none"><code class="language-none">输入：hats &#x3D; [[3,4],[4,5],[5]]
+输出：1
+解释：给定条件下只有一种方法选择帽子。
+第一个人选择帽子 3，第二个人选择帽子 4，最后一个人选择帽子 5。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="数据范围-8"><a href="#数据范围-8" class="headerlink" title="数据范围"></a>数据范围</h3><ul>
+<li><code>n == hats.length</code></li>
+<li><code>1 &lt;= n &lt;= 10</code></li>
+<li><code>1 &lt;= hats[i].length &lt;= 40</code></li>
+<li><code>1 &lt;= hats[i][j] &lt;= 40</code></li>
+<li><code>hats[i] 包含一个数字互不相同的整数列表。</code></li>
+</ul>
+<h3 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>状态表示<br>  $f[i][state]$:处理到第$i$顶帽子时,n个人选美选好帽子的状态为$state$的方案数</li>
+<li>状态转移<br>  子集:<br>  从第$1$顶帽子遍历到第$max(hats)$顶帽子<br>  <code>第i顶帽子是 |1 由当前的状态中的人选 |2 不由当前状态中的人选 </code><br>  $f[i][state] = f[i-1][state] + \sum_{j}f[i-1][state-(1&lt;&lt;j)] (如果第j个人能选第i顶帽子)$<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">numberWays</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> hats<span class="token punctuation">:</span> List<span class="token punctuation">[</span>List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        maxhat <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span><span class="token builtin">max</span><span class="token punctuation">(</span>hats<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>hats<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        mod <span class="token operator">=</span> <span class="token number">1e9</span><span class="token operator">+</span><span class="token number">7</span>
+        n <span class="token operator">=</span>  <span class="token builtin">len</span><span class="token punctuation">(</span>hats<span class="token punctuation">)</span>
+        f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>maxhat<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        hat2person <span class="token operator">=</span> collections<span class="token punctuation">.</span>defaultdict<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> h <span class="token keyword">in</span> hats<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span>
+                <span class="token comment"># hat2person[h] = hat2person.get(h,[])</span>
+                hat2person<span class="token punctuation">[</span>h<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+        <span class="token comment"># 处理0个帽子,没有人用帽子的方案数=1</span>
+        f<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span>
+        <span class="token comment"># 逐个遍历帽子 则到第i个帽子的时候前面的人都没用过第i顶帽子</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>maxhat<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> state <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token comment"># 如果不用第i个帽子,方案数=处理了前i-1个帽子的方案数</span>
+                f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>state<span class="token punctuation">]</span> <span class="token operator">=</span> f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>state<span class="token punctuation">]</span>
+                <span class="token keyword">for</span> j <span class="token keyword">in</span> hat2person<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token comment">#遍历对第i顶帽子能用的人j</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>state <span class="token operator">>></span> j<span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token comment">#如果当前状态有第j个人 则当前状态能从集合中去掉j 不选第i个帽子时的状态转移过来</span>
+                        f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>state<span class="token punctuation">]</span> <span class="token operator">+=</span> f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>state<span class="token operator">-</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j<span class="token punctuation">)</span><span class="token punctuation">]</span>
+                f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token operator">%=</span>mod        
+        <span class="token keyword">return</span> <span class="token builtin">int</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>maxhat<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+</li>
+</ul>
+<h2 id="leetcode1542-找出最长的超赞子字符串"><a href="#leetcode1542-找出最长的超赞子字符串" class="headerlink" title="leetcode1542 找出最长的超赞子字符串"></a>leetcode1542 找出最长的超赞子字符串</h2><p>给你一个字符串 <code>s</code> 。请返回 <code>s</code> 中最长的 超赞子字符串 的长度。</p>
+<p>「超赞子字符串」需满足满足下述两个条件：</p>
+<ul>
+<li>该字符串是 <code>s</code> 的一个非空子字符串</li>
+<li>进行任意次数的字符交换后，该字符串可以变成一个回文字符串</li>
+</ul>
+<h3 id="示例-8"><a href="#示例-8" class="headerlink" title="示例"></a>示例</h3><pre class="line-numbers language-none"><code class="language-none">输入：s &#x3D; &quot;3242415&quot;
+输出：5
+解释：&quot;24241&quot; 是最长的超赞子字符串，交换其中的字符后，可以得到回文 &quot;24142&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="数据范围-9"><a href="#数据范围-9" class="headerlink" title="数据范围"></a>数据范围</h3><ul>
+<li><p><code>1 &lt;= s.length &lt;= 10^5</code></p>
+</li>
+<li><p><code>s 仅由数字组成</code></p>
+</li>
+</ul>
+<h3 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h3><p>回文子串中各个数字中最多只有一个是奇数,因此我们可以用子串$s[i:j]$的奇偶性状态判断是否回文,等价于$state[s[:i]]$和$state[s[:j]]$在位数上<strong>最多只有一位</strong>不同</p>
+<ul>
+<li><p>状态表示<br>  维护状态映射到下标的前缀奇偶性字典$prefix$<br>  $prefix[state]=j$为$s[:j]$中$0\sim 9$各个数字个数的奇偶性状态为state</p>
+</li>
+<li><p>状态转移</p>
+<p>  $state$初始化为<code>0000000000</code></p>
+<p>  遍历$s$中的每个字符,当前遍历到了第$j$个字符$num$,则$s[:j]$中数$num$的个数$+1$,奇偶性与$state$中$1&lt;&lt;num$位相反,所以通过异或将当前状态更新为$state \bigoplus (1&lt;&lt;num)$</p>
+<p>  如果是第$1$次碰到奇偶性状态$state$,则$f[state]=j$</p>
+<ol>
+<li><strong>找全偶子串</strong>:如果是第$\geq 2$次碰到奇偶性状态$state$,则$state[s[:j]]-state[s[:prefix[state]]]=0$ 即子串$s[prefix[state]:j]$的奇偶性为全偶数,那么可以用子串$s[prefix[state]:j]$的长度更新$res=max(res,j-prefix[state])$</li>
+<li><strong>找只有1个奇数的子串</strong>:依次更改$state$中的每个位置的奇偶,$state_{ne}=state^(1&lt;&lt;k) for k in [0,9]当state_{ne}在字典中(下标小于j的时候出现过)$,则$state[s[:j]]-state_{ne}[s[:prefix[state_{ne}]]]=1$ 即子串$s[prefix[state_{ne}]:j]$的奇偶性为只有一个奇数,那么可以用子串$s[prefix[state_{ne}]:j]$的长度更新$res=max(res,j-prefix[state_{ne}])$</li>
+</ol>
+</li>
+</ul>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">longestAwesome</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+        prefix <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">&#125;</span>
+        res<span class="token punctuation">,</span>state <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>
+        <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            num <span class="token operator">=</span> <span class="token builtin">ord</span><span class="token punctuation">(</span>s<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"0"</span><span class="token punctuation">)</span>
+            state <span class="token operator">^</span><span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>num<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> state <span class="token keyword">in</span> prefix<span class="token punctuation">:</span><span class="token comment">#如果有这个状态 则s[prefix[state]:j]奇偶性为全偶 所以更新答案</span>
+                res <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span>j<span class="token operator">-</span>prefix<span class="token punctuation">[</span>state<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span><span class="token comment">#如果第一次出现这个状态</span>
+                prefix<span class="token punctuation">[</span>state<span class="token punctuation">]</span> <span class="token operator">=</span> j
+            <span class="token comment"># 当前状态更改一位数的奇偶性的状态state_ne</span>
+            <span class="token keyword">for</span> k <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                state_ne <span class="token operator">=</span> state <span class="token operator">^</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>k<span class="token punctuation">)</span>
+                <span class="token keyword">if</span> state_ne <span class="token keyword">in</span> prefix<span class="token punctuation">:</span><span class="token comment">#如果state_ne在之前有更小的下标碰到过,则子串s[prefix[state_ne]:j]是只有一位数个数是奇数的子串</span>
+                    res <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span>j<span class="token operator">-</span>prefix<span class="token punctuation">[</span>state_ne<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="连通类状态压缩动态规划"><a href="#连通类状态压缩动态规划" class="headerlink" title="连通类状态压缩动态规划"></a>连通类状态压缩动态规划</h2><h2 id="leetcode-1349-参加考试的最大学生数"><a href="#leetcode-1349-参加考试的最大学生数" class="headerlink" title="leetcode 1349 参加考试的最大学生数"></a>leetcode 1349 参加考试的最大学生数</h2><p>给你一个<code>m*n</code>的矩阵 <code>seats</code>表示教室中的座位分布。如果座位是坏的（不可用），就用<code>&#39;#&#39;</code>表示；否则，用<code>&#39;.&#39;</code>表示。</p>
+<p>学生可以看到左侧、右侧、左上、右上这四个方向上紧邻他的学生的答卷，但是看不到直接坐在他前面或者后面的学生的答卷。请你计算并返回该考场可以容纳的一起参加考试且无法作弊的最大学生人数。</p>
+<p>学生必须坐在状况良好的座位上。</p>
+<h3 id="示例-9"><a href="#示例-9" class="headerlink" title="示例:"></a>示例:</h3><pre class="line-numbers language-none"><code class="language-none">输入：seats &#x3D; [[&quot;#&quot;,&quot;.&quot;,&quot;#&quot;,&quot;#&quot;,&quot;.&quot;,&quot;#&quot;],
+              [&quot;.&quot;,&quot;#&quot;,&quot;#&quot;,&quot;#&quot;,&quot;#&quot;,&quot;.&quot;],
+              [&quot;#&quot;,&quot;.&quot;,&quot;#&quot;,&quot;#&quot;,&quot;.&quot;,&quot;#&quot;]]
+输出：4
+解释：教师可以让 4 个学生坐在可用的座位上，这样他们就无法在考试中作弊。 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="数据范围-10"><a href="#数据范围-10" class="headerlink" title="数据范围"></a>数据范围</h3><ul>
+<li><code>seats只包含字符&#39;.&#39;和&#39;#&#39;</code></li>
+<li><code>m ==seats.length</code></li>
+<li><code>n ==seats[i].length</code></li>
+<li><code>1 &lt;= m &lt;= 8</code></li>
+<li><code>1 &lt;= n &lt;= 8</code></li>
+</ul>
+<h3 id="连通性状压dp"><a href="#连通性状压dp" class="headerlink" title="连通性状压dp"></a>连通性状压dp</h3><ul>
+<li><p>状态表示<br>  $f[i][state]$ 第$i$行学生座位排布集合为$state$</p>
+</li>
+<li><p>状态转移<br>  $f[i-1][ne]=max(f[i-1][ne],f[i][cur]+cnt1(ne))$</p>
+<p>  从最后一排往前排座位</p>
+<p>  遍历前一排的所有合法状态$ne$ 合法条件:$ne$没有相邻两个1 同时有1的位置与’#’不冲突</p>
+<p>  遍历当前排的所有合法状态$cur$ 合法条件:$cur$的1的相邻位上$ne$没有1</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">maxStudents</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> seats<span class="token punctuation">:</span> List<span class="token punctuation">[</span>List<span class="token punctuation">[</span><span class="token builtin">str</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">,</span>n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>seats<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>seats<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+        f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span>m
+        <span class="token keyword">def</span> <span class="token function">cnt1</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            res <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword">while</span> state<span class="token punctuation">:</span>
+                state<span class="token operator">-=</span>state<span class="token operator">&amp;</span><span class="token operator">-</span>state
+                res<span class="token operator">+=</span><span class="token number">1</span>
+            <span class="token keyword">return</span> res
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> seats<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">==</span><span class="token string">'#'</span><span class="token punctuation">:</span>
+                    a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">|</span><span class="token operator">=</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>j
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token comment"># 下一行状态ne</span>
+            <span class="token keyword">for</span> ne <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                <span class="token keyword">if</span> <span class="token keyword">not</span> ne<span class="token operator">&amp;</span><span class="token punctuation">(</span>ne<span class="token operator">&lt;&lt;</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token keyword">not</span> ne<span class="token operator">&amp;</span><span class="token punctuation">(</span>ne<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token keyword">not</span> ne<span class="token operator">&amp;</span>a<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+                    <span class="token comment"># 当前行状态cur</span>
+                    <span class="token keyword">for</span> cur <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                        <span class="token keyword">if</span> <span class="token keyword">not</span> ne<span class="token operator">&amp;</span><span class="token punctuation">(</span>cur<span class="token operator">&lt;&lt;</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">and</span> <span class="token keyword">not</span> ne<span class="token operator">&amp;</span><span class="token punctuation">(</span>cur<span class="token operator">>></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                            f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>ne<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token builtin">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>ne<span class="token punctuation">]</span><span class="token punctuation">,</span>f<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>cur<span class="token punctuation">]</span><span class="token operator">+</span>cnt1<span class="token punctuation">(</span>ne<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token builtin">max</span><span class="token punctuation">(</span>f<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+
                 
             </div>
             <hr/>
