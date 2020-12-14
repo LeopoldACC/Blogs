@@ -517,11 +517,9 @@
 1 1 1 1 1
 ---------  比如到第三行 heights &#x3D; [3,1,3,2,2]
 1 0 0 1 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>则问题转化为84题</p>
-<pre class="line-numbers language-none"><code class="language-none">|   |
+<p>则问题转化为84题<br><pre class="line-numbers language-none"><code class="language-none">|   |
 |   | | |
-| | | | |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
+| | | | |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></p>
 <p>逐行递归 对每一行</p>
 <p>得到每行中每一列的高度<code>heights[i][j]</code></p>
 <ol>
@@ -558,8 +556,7 @@
         <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="最小数字、最小字典序问题"><a href="#最小数字、最小字典序问题" class="headerlink" title="最小数字、最小字典序问题"></a>最小数字、最小字典序问题</h1><h2 id="Leetcode402-移掉K位数字"><a href="#Leetcode402-移掉K位数字" class="headerlink" title="Leetcode402 移掉K位数字"></a>Leetcode402 移掉K位数字</h2><p>思考为什么要用单调性?<br>因为单增的情况<br>num = 1234567  k = 2 时就删最后两位就行</p>
 <p>如果出现递减<br>num = 1234<strong>52</strong>6  k = 2<br>对<code>526</code> <code>5&gt;2</code>则用更低位的2替换更高位的5 num肯定减少<br>同理对42也是</p>
-<p>所以用单调增栈维护当前前i位数构成的数如果出现<strong>递减</strong>,则删除栈顶</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+<p>所以用单调增栈维护当前前i位数构成的数如果出现<strong>递减</strong>,则删除栈顶<br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">removeKdigits</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">,</span> k<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">str</span><span class="token punctuation">:</span>
         stk <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
         n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
@@ -574,11 +571,9 @@
             <span class="token keyword">return</span> <span class="token string">'0'</span>
         <span class="token keyword">while</span> stk <span class="token keyword">and</span> stk<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token string">'0'</span><span class="token punctuation">:</span>
             stk <span class="token operator">=</span> stk<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span>
-        <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>stk<span class="token punctuation">)</span> <span class="token keyword">if</span> stk <span class="token keyword">else</span> <span class="token string">'0'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+        <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>stk<span class="token punctuation">)</span> <span class="token keyword">if</span> stk <span class="token keyword">else</span> <span class="token string">'0'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 <h2 id="Leetcode1081不同字符的最小子序列-316去除重复字母"><a href="#Leetcode1081不同字符的最小子序列-316去除重复字母" class="headerlink" title="Leetcode1081不同字符的最小子序列/316去除重复字母"></a>Leetcode1081不同字符的最小子序列/316去除重复字母</h2><p>与上面题目不同，这道题没有一个全局的删除次数 k。而是对于每一个在字符串 s 中出现的字母 c 都有一个 k 值。这个 k 是 c 出现次数 - 1。</p>
-<p>沿用上面的知识的话，我们首先要做的就是计算每一个字符的 k，可以用一个字典来描述这种关系，其中 key 为 字符 c，value 为其出现的次数。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+<p>沿用上面的知识的话，我们首先要做的就是计算每一个字符的 k，可以用一个字典来描述这种关系，其中 key 为 字符 c，value 为其出现的次数。<br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">smallestSubsequence</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">:</span> <span class="token builtin">str</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">str</span><span class="token punctuation">:</span>
         stk <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
         k_cnt <span class="token operator">=</span> collections<span class="token punctuation">.</span>Counter<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
@@ -589,8 +584,7 @@
                     stk<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token punctuation">)</span>
                 stk<span class="token punctuation">.</span>append<span class="token punctuation">(</span>c<span class="token punctuation">)</span>
             k_cnt<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token operator">-=</span><span class="token number">1</span>
-        <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>stk<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+        <span class="token keyword">return</span> <span class="token string">''</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>stk<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 <h2 id="Leetcode321-拼接最大数"><a href="#Leetcode321-拼接最大数" class="headerlink" title="Leetcode321 拼接最大数"></a>Leetcode321 拼接最大数</h2><p>我们将从 num1 中挑选的 k1 个数组成的数组称之为 A，将从 num2 中挑选的 k2 个数组成的数组称之为 B，</p>
 <p><strong>在很多编程语言中：如果 A 和 B 是两个数组，当前仅当 A 的首个元素字典序大于 B 的首个元素，A &gt; B 返回 true，否则返回 false。</strong></p>
 <pre class="line-numbers language-none"><code class="language-none">example
@@ -601,11 +595,9 @@ A &lt; B # True
 A &#x3D; [1,2]
 B &#x3D; [1,2,3]
 A &lt; B # False<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>取法通过单调递减栈维护</p>
-<pre class="line-numbers language-none"><code class="language-none">example
+<p>取法通过单调递减栈维护<br><pre class="line-numbers language-none"><code class="language-none">example
 [9 1 2 5 8 3] k &#x3D;3
-[9 8 3]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
+[9 8 3]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">maxNumber</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> nums1<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">,</span> nums2<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">,</span> k<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
         <span class="token keyword">def</span> <span class="token function">pick_max</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -868,13 +860,13 @@ A &lt; B # False<span aria-hidden="true" class="line-numbers-rows"><span></span>
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/Blogs/2020/12/05/%E5%8D%A2%E5%8D%A1%E6%96%AF%E5%AE%9A%E7%90%86/">
+                <a href="/Blogs/2020/12/04/CVPR2020-%E7%82%B9%E4%BA%91-GCD+Autoencoder-GraphTER/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/16.jpg" class="responsive-img" alt="lucas定理">
+                        <img src="/Blogs/medias/featureimages/6.jpg" class="responsive-img" alt="CVPR2020-GraphTER-Unsupervised Learning of Graph Transformation Equivariant Representations via Auto-Encoding Node-wise Transformations">
                         
-                        <span class="card-title">lucas定理</span>
+                        <span class="card-title">CVPR2020-GraphTER-Unsupervised Learning of Graph Transformation Equivariant Representations via Auto-Encoding Node-wise Transformations</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -885,14 +877,14 @@ A &lt; B # False<span aria-hidden="true" class="line-numbers-rows"><span></span>
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-05
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
-                                    数据结构与算法
+                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
+                                    计算机视觉
                                 </a>
                             
                             
@@ -902,12 +894,16 @@ A &lt; B # False<span aria-hidden="true" class="line-numbers-rows"><span></span>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/lucas%E5%AE%9A%E7%90%86/">
-                        <span class="chip bg-color">lucas定理</span>
+                    <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
+                        <span class="chip bg-color">点云数据</span>
                     </a>
                     
-                    <a href="/Blogs/tags/%E6%95%B0%E5%AD%A6/">
-                        <span class="chip bg-color">数学</span>
+                    <a href="/Blogs/tags/%E6%97%A0%E7%9B%91%E7%9D%A3/">
+                        <span class="chip bg-color">无监督</span>
+                    </a>
+                    
+                    <a href="/Blogs/tags/%E5%9B%BE%E5%8D%B7%E7%A7%AF/">
+                        <span class="chip bg-color">图卷积</span>
                     </a>
                     
                 </div>
@@ -921,13 +917,13 @@ A &lt; B # False<span aria-hidden="true" class="line-numbers-rows"><span></span>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/Blogs/2020/12/04/CVPR2018%E5%9F%9F%E8%87%AA%E9%80%82%E5%BA%94%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+                <a href="/Blogs/2020/12/04/%E9%93%BE%E8%A1%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/1.jpg" class="responsive-img" alt="CVPR2018-Learning to Adapt Structured Output Space for Semantic Segmentation">
+                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="链表">
                         
-                        <span class="card-title">CVPR2018-Learning to Adapt Structured Output Space for Semantic Segmentation</span>
+                        <span class="card-title">链表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -944,8 +940,8 @@ A &lt; B # False<span aria-hidden="true" class="line-numbers-rows"><span></span>
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                    计算机视觉
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数据结构与算法
                                 </a>
                             
                             
@@ -955,12 +951,12 @@ A &lt; B # False<span aria-hidden="true" class="line-numbers-rows"><span></span>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
-                        <span class="chip bg-color">语义分割</span>
+                    <a href="/Blogs/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
                     </a>
                     
-                    <a href="/Blogs/tags/%E5%9F%9F%E8%87%AA%E9%80%82%E5%BA%94/">
-                        <span class="chip bg-color">域自适应</span>
+                    <a href="/Blogs/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="chip bg-color">链表</span>
                     </a>
                     
                 </div>

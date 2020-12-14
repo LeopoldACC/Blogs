@@ -489,17 +489,22 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p><img src="https://cdn.acwing.com/media/article/image/2020/11/05/39715_3970146e1f-CVPR2018-adaptsegnet.PNG" alt="CVPR2018 adaptsegnet.PNG"> </p>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1802.10349.pdf">论文链接</a><br>*<br>As the labeling process is tedious and labor intensive, developing algorithms that can adapt source ground truth labels to the target domain is of great interest. In this paper, we propose an adversarial learning method for domain adaptation in the context of semantic segmentation.<br>Considering semantic segmentations as structured outputs that contain spatial similarities between the source and target domains, we adopt adversarial learning in the output space. To further enhance the adapted model, we construct a multi-level adversarial network to effectively perform output space domain adaptation at different feature levels.<br>*<br>对于自动驾驶中语义分割任务, 由于标记过程繁琐且费力，因此提出了一种在语义分割的上下文中进行领域自适应的对抗学习方法来用GTA5数据(自带标注,源域)训练,并将真实世界(标注很少,目标域)特征对齐到源域特征,从而不用在真实世界标注大量数据。</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1802.10349.pdf">论文链接</a><br><em><br>As the labeling process is tedious and labor intensive, developing algorithms that can adapt source ground truth labels to the target domain is of great interest. In this paper, we propose an adversarial learning method for domain adaptation in the context of semantic segmentation.<br>Considering semantic segmentations as structured outputs that contain spatial similarities between the source and target domains, we adopt adversarial learning in the output space. To further enhance the adapted model, we construct a multi-level adversarial network to effectively perform output space domain adaptation at different feature levels. 
+</em><br>对于自动驾驶中语义分割任务, 由于标记过程繁琐且费力，因此提出了一种在语义分割的上下文中进行领域自适应的对抗学习方法来用GTA5数据(自带标注,源域)训练,并将真实世界(标注很少,目标域)特征对齐到源域特征,从而不用在真实世界标注大量数据。</p>
 <p>主要看三个损失</p>
-<p>$$<br>\mathcal{L}{d}\left(P\right)=-\sum_{h, w}(1-z) \log \left(\mathbf{D}(P)^{(h, w, 0)}\right)+z \log \left(\mathbf{D}(P)^{(h, w, 1)}\right)<br>$$<br>*<br>where z = 0 if the sample is drawn from the target domain,and z = 1 for the sample from the source domain.<br>*<br>第一个损失 训练一个discriminator区分分割语义图是来自目标域还是源域</p>
+<script type="math/tex; mode=display">
+\mathcal{L}{d}\left(P\right)=-\sum_{h, w}(1-z) \log \left(\mathbf{D}(P)^{(h, w, 0)}\right)+z \log \left(\mathbf{D}(P)^{(h, w, 1)}\right)</script><p><em><br>where z = 0 if the sample is drawn from the target domain,and z = 1 for the sample from the source domain.
+</em><br>第一个损失 训练一个discriminator区分分割语义图是来自目标域还是源域</p>
 <p>当z=0(来自目标域时),则只剩第一项<code>-logD(p)0</code>越小<code>logD(p)0</code>越大<code>D(p)0</code>越大-D能区分出来自目标域的分割图</p>
 <p>来自源域 z=1,那么第二项<code>-logD(p)1</code>越小<code>logD(p)1</code>越大<code>D(p)1</code>越大-D能区分出来自源域的分割图</p>
-<p>$$<br>\mathcal{L}{s e g}\left(I{s}\right)=-\sum_{h, w} \sum_{c \in C} Y{s}^{(h, w, c)} \log \left(P_{s}^{(h, w, c)}\right)<br>$$</p>
-<p>第二个损失,<code>Y</code>为语义分割标签,<code>P</code>为语义分割概率,即我们想要<code>-logP[h,w]</code>位置上输出第<code>c</code>类的概率*第<code>c</code>类标签(非c类0,c类1)越小,即让<code>logP[h,w]</code>位置上输出第<code>c</code>类的概率越大,即让<code>P[h,w,c]</code>越大</p>
-<p>*<br>for images in the target domain, we forward them to G and obtain the prediction Pt = G(It). To make the distribution of Pt closer to Ps, we use an adversarial loss Ladv in (1) as:<br>*</p>
-<p>$$<br>\mathcal{L}{a d v}\left(I_{t}\right)=-\sum \log \left(\mathbf{D}\left(P_{t}\right)^{(h, w, 1)}\right)<br>$$</p>
-<p>第三个损失,对于目标域图(真实图),我们想要训练<code>G</code>生成的预测图<code>Pt=G(It)</code>的分布越接近<code>Ps(G(Is))</code>越好,那么就是让这<code>Pt</code>在之前训练好的<code>D</code>上预测为来自源域的概率越大越好<br>源域 <code>z=1</code>,那么<code>-logD(Pt)1</code>越小<code>logD(Pt)1</code>越大<code>D(Pt)1</code>越大 <code>D</code>被<code>G</code>(目标域图<code>It</code>)生成的<code>Pt</code>“欺骗”了,将实际上来自目标域的分割图被判定为来自源域的分割图。</p>
-<p>*<br>This loss is designed to train the segmentation network and fool the discriminator by maximizing the probability of the target prediction being considered as the source prediction.<br>*</p>
+<script type="math/tex; mode=display">
+\mathcal{L}{s e g}\left(I{s}\right)=-\sum_{h, w} \sum_{c \in C} Y{s}^{(h, w, c)} \log \left(P_{s}^{(h, w, c)}\right)</script><p>第二个损失,<code>Y</code>为语义分割标签,<code>P</code>为语义分割概率,即我们想要<code>-logP[h,w]</code>位置上输出第<code>c</code>类的概率*第<code>c</code>类标签(非c类0,c类1)越小,即让<code>logP[h,w]</code>位置上输出第<code>c</code>类的概率越大,即让<code>P[h,w,c]</code>越大</p>
+<p><em><br>for images in the target domain, we forward them to G and obtain the prediction Pt = G(It). To make the distribution of Pt closer to Ps, we use an adversarial loss Ladv in (1) as:
+</em></p>
+<script type="math/tex; mode=display">
+\mathcal{L}{a d v}\left(I_{t}\right)=-\sum \log \left(\mathbf{D}\left(P_{t}\right)^{(h, w, 1)}\right)</script><p>第三个损失,对于目标域图(真实图),我们想要训练<code>G</code>生成的预测图<code>Pt=G(It)</code>的分布越接近<code>Ps(G(Is))</code>越好,那么就是让这<code>Pt</code>在之前训练好的<code>D</code>上预测为来自源域的概率越大越好<br>源域 <code>z=1</code>,那么<code>-logD(Pt)1</code>越小<code>logD(Pt)1</code>越大<code>D(Pt)1</code>越大 <code>D</code>被<code>G</code>(目标域图<code>It</code>)生成的<code>Pt</code>“欺骗”了,将实际上来自目标域的分割图被判定为来自源域的分割图。</p>
+<p><em><br>This loss is designed to train the segmentation network and fool the discriminator by maximizing the probability of the target prediction being considered as the source prediction.
+</em></p>
 <p>那么在这个过程中,<strong>目标域图像在G中间生成的语义特征就和源域拉近了(G对目标域生成的语义特征和源域生成的语义特征差别变得很小),那么在源域上训练的分类器就可以用于G(It)了</strong>,即我们就可以用在源域(GTA5)上训练的网络去对目标域(真实世界)的数据进行语义分割任务</p>
 
                 
@@ -744,13 +749,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/Blogs/2020/12/04/%E5%8D%95%E8%B0%83%E6%A0%88/">
+                <a href="/Blogs/2020/12/05/%E5%8D%A2%E5%8D%A1%E6%96%AF%E5%AE%9A%E7%90%86/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="单调栈">
+                        <img src="/Blogs/medias/featureimages/16.jpg" class="responsive-img" alt="lucas定理">
                         
-                        <span class="card-title">单调栈</span>
+                        <span class="card-title">lucas定理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -761,7 +766,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-05
                         </span>
                         <span class="publish-author">
                             
@@ -778,12 +783,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">
-                        <span class="chip bg-color">单调栈</span>
+                    <a href="/Blogs/tags/lucas%E5%AE%9A%E7%90%86/">
+                        <span class="chip bg-color">lucas定理</span>
                     </a>
                     
-                    <a href="/Blogs/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
+                    <a href="/Blogs/tags/%E6%95%B0%E5%AD%A6/">
+                        <span class="chip bg-color">数学</span>
                     </a>
                     
                 </div>
@@ -797,13 +802,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/Blogs/2020/12/04/%E9%93%BE%E8%A1%A8/">
+                <a href="/Blogs/2020/12/04/CVPR2020-Foreground-Aware%20Relation%20Network%20for%20Geospatial%20Object%20Segmentation%20in%20High%20Spatial%20Resolution%20Remote%20Sensing%20Imagery/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="链表">
+                        <img src="/Blogs/medias/featureimages/11.jpg" class="responsive-img" alt="CVPR2020-Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery">
                         
-                        <span class="card-title">链表</span>
+                        <span class="card-title">CVPR2020-Foreground-Aware Relation Network for Geospatial Object Segmentation in High Spatial Resolution Remote Sensing Imagery</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -820,8 +825,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
-                                    数据结构与算法
+                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
+                                    计算机视觉
                                 </a>
                             
                             
@@ -831,12 +836,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
+                    <a href="/Blogs/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+                        <span class="chip bg-color">语义分割</span>
                     </a>
                     
-                    <a href="/Blogs/tags/%E9%93%BE%E8%A1%A8/">
-                        <span class="chip bg-color">链表</span>
+                    <a href="/Blogs/tags/%E9%81%A5%E6%84%9F%E5%9B%BE%E5%83%8F/">
+                        <span class="chip bg-color">遥感图像</span>
                     </a>
                     
                 </div>

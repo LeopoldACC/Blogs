@@ -495,8 +495,7 @@
 <h2 id="92反转链表2"><a href="#92反转链表2" class="headerlink" title="92反转链表2"></a>92反转链表2</h2><p><code>pre:开始反转的前一个节点</code></p>
 <p><code>cur:原链表当前节点</code></p>
 <p><code>ne:原链表下一个节点</code></p>
-<p><code>nx:新链表下一个节点,初始化为第n+1个节点</code></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+<p><code>nx:新链表下一个节点,初始化为第n+1个节点</code><br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">reverseBetween</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> head<span class="token punctuation">:</span> ListNode<span class="token punctuation">,</span> m<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">,</span> n<span class="token punctuation">:</span> <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> ListNode<span class="token punctuation">:</span>
         tmp <span class="token operator">=</span> ListNode<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
         tmp<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> head
@@ -519,8 +518,7 @@
             cur <span class="token operator">=</span> ne
             
         pre<span class="token punctuation">.</span><span class="token builtin">next</span> <span class="token operator">=</span> nx<span class="token comment"># fro:1→2→3→4→5中的1</span>
-        <span class="token keyword">return</span> tmp<span class="token punctuation">.</span><span class="token builtin">next</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+        <span class="token keyword">return</span> tmp<span class="token punctuation">.</span><span class="token builtin">next</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 <h2 id="链表排序"><a href="#链表排序" class="headerlink" title="链表排序"></a>链表排序</h2><h2 id="147链表插入排序O-n-2"><a href="#147链表插入排序O-n-2" class="headerlink" title="147链表插入排序O(n^2)"></a>147链表插入排序O(n^2)</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">insertionSortList</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> head<span class="token punctuation">:</span> ListNode<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> ListNode<span class="token punctuation">:</span>
         tmp <span class="token operator">=</span> ListNode<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
@@ -814,13 +812,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/Blogs/2020/12/04/CVPR2018%E5%9F%9F%E8%87%AA%E9%80%82%E5%BA%94%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+                <a href="/Blogs/2020/12/04/%E5%8D%95%E8%B0%83%E6%A0%88/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/1.jpg" class="responsive-img" alt="CVPR2018-Learning to Adapt Structured Output Space for Semantic Segmentation">
+                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="单调栈">
                         
-                        <span class="card-title">CVPR2018-Learning to Adapt Structured Output Space for Semantic Segmentation</span>
+                        <span class="card-title">单调栈</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -837,8 +835,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                    计算机视觉
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数据结构与算法
                                 </a>
                             
                             
@@ -848,12 +846,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
-                        <span class="chip bg-color">语义分割</span>
+                    <a href="/Blogs/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">
+                        <span class="chip bg-color">单调栈</span>
                     </a>
                     
-                    <a href="/Blogs/tags/%E5%9F%9F%E8%87%AA%E9%80%82%E5%BA%94/">
-                        <span class="chip bg-color">域自适应</span>
+                    <a href="/Blogs/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
                     </a>
                     
                 </div>
@@ -864,16 +862,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/Blogs/2020/12/04/CVPR2020-%E7%82%B9%E4%BA%91-GCD+Autoencoder-GraphTER/">
+                <a href="/Blogs/2020/12/04/%E9%93%BE%E8%A1%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/6.jpg" class="responsive-img" alt="CVPR2020-GraphTER-Unsupervised Learning of Graph Transformation Equivariant Representations via Auto-Encoding Node-wise Transformations">
+                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="链表">
                         
-                        <span class="card-title">CVPR2020-GraphTER-Unsupervised Learning of Graph Transformation Equivariant Representations via Auto-Encoding Node-wise Transformations</span>
+                        <span class="card-title">链表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -890,27 +888,24 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                    计算机视觉
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数据结构与算法
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/%E6%97%A0%E7%9B%91%E7%9D%A3/">
-                        <span class="chip bg-color">无监督</span>
+                    <a href="/Blogs/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
                     </a>
                     
-                    <a href="/Blogs/tags/%E5%9B%BE%E5%8D%B7%E7%A7%AF/">
-                        <span class="chip bg-color">图卷积</span>
-                    </a>
-                    
-                    <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
-                        <span class="chip bg-color">点云数据</span>
+                    <a href="/Blogs/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="chip bg-color">链表</span>
                     </a>
                     
                 </div>

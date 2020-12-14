@@ -435,12 +435,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/Blogs/tags/%E6%97%A0%E7%9B%91%E7%9D%A3/">
-                                <span class="chip bg-color">无监督</span>
-                            </a>
-                        
-                            <a href="/Blogs/tags/%E5%9B%BE%E5%8D%B7%E7%A7%AF/">
-                                <span class="chip bg-color">图卷积</span>
+                            <a href="/Blogs/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/">
+                                <span class="chip bg-color">对抗攻击</span>
                             </a>
                         
                             <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
@@ -493,23 +489,20 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="CVPR2020-Geometric-Adversarial-Attacks-and-Defenses-on-3D-Point-Clouds"><a href="#CVPR2020-Geometric-Adversarial-Attacks-and-Defenses-on-3D-Point-Clouds" class="headerlink" title="CVPR2020 Geometric Adversarial Attacks and Defenses on 3D Point Clouds"></a>CVPR2020 Geometric Adversarial Attacks and Defenses on 3D Point Clouds</h2><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>深度神经网络很容易出现恶意攻击，这些攻击会恶意更改网络的结果。在这项工作中，我们从几何角度探索对抗性例子。 也就是说，<strong>对源点云的微小更改在通过自动编码器模型后会导致来自其他目标类的形状</strong>。在防御方面，我们表明，在将防御应用于对抗输入之后，重构后的输出中仍会存在攻击目标形状的残留物。 </p>
-<h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2><p><img src="https://cdn.acwing.com/media/article/image/2020/12/14/39715_9057958d3d-1.PNG" alt="1.PNG"> </p>
+<h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2><p><img src="https://cdn.acwing.com/media/article/image/2020/12/14/39715_9057958d3d-1.PNG" alt=""> </p>
 <p>如上图所示,通过学习一个扰动$P=\delta x_{椅子}$使得$autoencoder$对加了扰动后的椅子点云$Q=S+P$重建为车,$f(x_{椅子} + \delta x_{椅子})=f(x_{椅子} + P)=f(S+P)=f(Q)=x_{车}$,</p>
-<h3 id="主要看-2-个-loss"><a href="#主要看-2-个-loss" class="headerlink" title="主要看$2$个$loss$"></a>主要看$2$个$loss$</h3><h4 id="第1个-loss"><a href="#第1个-loss" class="headerlink" title="第1个$loss$"></a>第1个$loss$</h4><p>让加了扰动后的椅子点云$Q$与目标车点云$T$经过$autoencoder$中间编码的隐特征越近越好,同时要保持扰动后的椅子和扰动前的椅子相差不大,这里的$loss$都是欧式距离</p>
-<p>$$<br>P^{*}=\underset{P}{argmin} L_{latent}(z_{Q},z_{T})+\lambda L_{distance}(Q,S)<br>$$</p>
-<h4 id="第2个-loss"><a href="#第2个-loss" class="headerlink" title="第2个$loss$"></a>第2个$loss$</h4><p>让加了扰动后的椅子点云经过$autoencoder$后的重建点云$\hat{Q}$与目标车点云$T$越近越好,同时要保持扰动后的椅子和扰动前的椅子相差不大,这里的$loss$都是欧式距离<br>$$<br>P^{*}=\underset{P}{argmin} L_{latent}(\hat{Q},T)+\lambda L_{distance}(Q,T)<br>$$</p>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/12/14/39715_8d55892a3d-0.PNG" alt="0.PNG"> </p>
+<h3 id="主要看2个-loss"><a href="#主要看2个-loss" class="headerlink" title="主要看2个$loss$"></a>主要看2个$loss$</h3><h4 id="第1个-loss"><a href="#第1个-loss" class="headerlink" title="第1个$loss$"></a>第1个$loss$</h4><p>让加了扰动后的椅子点云$Q$与目标车点云$T$经过$autoencoder$中间编码的隐特征越近越好,同时要保持扰动后的椅子和扰动前的椅子相差不大,这里的$loss$都是欧式距离</p>
+<script type="math/tex; mode=display">
+P^{*}=\underset{P}{argmin} L_{latent}(z_{Q},z_{T})+\lambda L_{distance}(Q,S)</script><h4 id="第2个-loss"><a href="#第2个-loss" class="headerlink" title="第2个$loss$"></a>第2个$loss$</h4><p>让加了扰动后的椅子点云经过$autoencoder$后的重建点云$\hat{Q}$与目标车点云$T$越近越好,同时要保持扰动后的椅子和扰动前的椅子相差不大,这里的$loss$都是欧式距离</p>
+<script type="math/tex; mode=display">
+P^{*}=\underset{P}{argmin} L_{latent}(\hat{Q},T)+\lambda L_{distance}(Q,T)</script><p><img src="https://cdn.acwing.com/media/article/image/2020/12/14/39715_8d55892a3d-0.PNG" alt=""> </p>
 <h2 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h2><p>防御措施是在编码器端，在恶意输入点云上进行的。使输入中的对抗点偏离，以抵消攻击对重构输出的影响。 我们提出两种防御措施。</p>
-<ol>
-<li><p>依靠点云中的最近邻居统计信息来删除表面外的点。 这种防御不基于被攻击的$autoencoder$。 </p>
-<p> 去除表面上的点<br> 在清洁点集中，一个点通常在形状的表面上具有邻近点。 相反，对抗性输入可能具有表面外的点。<br> 算一个点和临近点的平均距离,如果超过阈值说明它是不在正常曲面上的点而是攻击后扰动的点,就删去<br> $$<br> \bar{d}<em>{q} = \frac{1}{k} \sum^{i \in N^{k}(q)} ||q-q^{i}||\\<br> Q\</em>{surf}^{def}  = q \in Q | \bar{d^{q}} \leq \delta\\<br> $$</p>
-</li>
-</ol>
-<ol start="2">
-<li><p>基于被攻击的$autoencoder$。 确定出导致对抗性重建的关键点并过滤掉它们</p>
-<p> 对抗性扰动将点移动到使$autoencoder$输出所需目标形状的位置。 基于PointNet,学一个网络识别出影响$autoencoder$潜在向量的关键点。将他们滤掉后 同时对这些关键点位置进行补齐，从而减少了攻击对重建点云的影响。 将此防御的结果点云表示为$Q_{comp}^{def}$。</p>
-</li>
-</ol>
+<p>1.依靠点云中的最近邻居统计信息来删除表面外的点。 这种防御不基于被攻击的$autoencoder$。 </p>
+<p>去除表面上的点<br>在清洁点集中，一个点通常在形状的表面上具有邻近点。 相反，对抗性输入可能具有表面外的点。<br>算一个点和临近点的平均距离,如果超过阈值说明它是不在正常曲面上的点而是攻击后扰动的点,就删去</p>
+<script type="math/tex; mode=display">
+\bar{d}_{q}=\frac{1}{k}\sum_{i\in N^{k}(q) }||q-q^{i}||</script><script type="math/tex; mode=display">
+Q_{surf}^{def}=\left\{q\in Q| \bar{ d^{q} }\leq\delta\right\}</script><p>2.基于被攻击的$autoencoder$。 确定出导致对抗性重建的关键点并过滤掉它们</p>
+<p>对抗性扰动将点移动到使$autoencoder$输出所需目标形状的位置。 基于PointNet,学一个网络识别出影响$autoencoder$潜在向量的关键点。将他们滤掉后 同时对这些关键点位置进行补齐，从而减少了攻击对重建点云的影响。 将此防御的结果点云表示为$Q_{comp}^{def}$。</p>
 
                 
             </div>
@@ -574,12 +567,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/Blogs/tags/%E6%97%A0%E7%9B%91%E7%9D%A3/">
-                                    <span class="chip bg-color">无监督</span>
-                                </a>
-                            
-                                <a href="/Blogs/tags/%E5%9B%BE%E5%8D%B7%E7%A7%AF/">
-                                    <span class="chip bg-color">图卷积</span>
+                                <a href="/Blogs/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/">
+                                    <span class="chip bg-color">对抗攻击</span>
                                 </a>
                             
                                 <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
@@ -793,12 +782,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/%E6%97%A0%E7%9B%91%E7%9D%A3/">
-                        <span class="chip bg-color">无监督</span>
-                    </a>
-                    
-                    <a href="/Blogs/tags/%E5%9B%BE%E5%8D%B7%E7%A7%AF/">
-                        <span class="chip bg-color">图卷积</span>
+                    <a href="/Blogs/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/">
+                        <span class="chip bg-color">对抗攻击</span>
                     </a>
                     
                     <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">

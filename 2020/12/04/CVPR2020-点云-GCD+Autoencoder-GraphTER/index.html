@@ -435,16 +435,16 @@
                     
                     <div class="article-tag">
                         
+                            <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
+                                <span class="chip bg-color">点云数据</span>
+                            </a>
+                        
                             <a href="/Blogs/tags/%E6%97%A0%E7%9B%91%E7%9D%A3/">
                                 <span class="chip bg-color">无监督</span>
                             </a>
                         
                             <a href="/Blogs/tags/%E5%9B%BE%E5%8D%B7%E7%A7%AF/">
                                 <span class="chip bg-color">图卷积</span>
-                            </a>
-                        
-                            <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
-                                <span class="chip bg-color">点云数据</span>
                             </a>
                         
                     </div>
@@ -492,25 +492,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://cdn.acwing.com/media/article/image/2020/10/30/39715_bb1a70c51a-cvpr2020graphTER.PNG" alt="cvpr2020graphTER.PNG"> </p>
+                <p><img src="https://cdn.acwing.com/media/article/image/2020/10/30/39715_bb1a70c51a-cvpr2020graphTER.PNG" alt=""> </p>
 <p>Recent advances in Graph Convolutional Neural Networks (GCNNs) have shown their efficiency for nonEuclidean data on graphs, which often require a large amount of labeled data with high cost. It it thus critical to learn graph feature representations in an unsupervised manner in practice. To this end, we propose a novel unsupervised learning of Graph Transformation Equivariant Representations (GraphTER), aiming to capture intrinsic patterns of graph structure under both global and local transformations. Specifically, we allow to sample different groups of nodes from a graph and then transform them node-wise isotropically or anisotropically. Then, we self-train a representation encoder to capture the graph structures by reconstructing these node-wise transformations from the feature representations of the original and transformed graphs.</p>
 <p>这段话意思就是:现在GCN在非欧式数据(比如点云)上有很好的效果,但图结构标注数据量过大,所以提出用无监督的方式(自编码器)学一个变换,从而能在被全局变换或者局部变换后的的数据上也能提取到相对应的图结构</p>
 <p>where f() is a linear or non-linear function applied to each pair of nodes to get the pair-wise similarity. For example,a widely adopted function is to nonlinearly construct a k-nearest-neighbor (kNN) graph from node features</p>
-<p>和pointnet系列的文章一样,图的边权是通过KNN(k个最近的点与中心点的差)+MLP(多层感知机)提取到的<br>$$A = f(X)$$</p>
-<p>Formally, suppose we sample a graph transformation t from a transformation distribution Tg, i.e., t $\sim$ Tg. Applying the transformation to graph signals X that are sampled from data distribution Xg, i.e., X $\sim$ Xg, leads to the filtered graph signal</p>
-<p>对变换方式的分布进行采样 并对图数据信号进行变换,则得到变换后的图信号<br>$$\widetilde{X} = t(X)$$<br>以及变换后的图结构<br>$$\widetilde{A} = f(\widetilde{X}) = f(t(X))$$</p>
-<p>然后对变换前的点云$X$和变换后的点云$\tilde{X}$在共享的encoder中做GCN,</p>
-<p>$$<br>X_{n×d}^{output}=A_{n×n}X_{n×d}W_{d×d’}<br>$$</p>
-<p>encoder得到的特征图中第i个点的特征$a_{i,j}$是 通过 第i个节点特征+ 邻域节点j特征相对原特征的偏移量  并作非线性映射后的最大的边特征</p>
-<p>这个公式打不出来 qaq<br><img src="https://cdn.acwing.com/media/article/image/2020/10/30/39715_37ac56ec1a-cvpr2020graphTER2.PNG" alt="cvpr2020graphTER2.PNG"> </p>
-<p>在encoder后的bottleneck处把$X_{output}和\widetilde{X}_{output}$做拼接<br><img src="https://cdn.acwing.com/media/article/image/2020/10/30/39715_241ac8e41a-cvpr2020graphTER1.PNG" alt="cvpr2020graphTER1.PNG"> </p>
+<p>和pointnet系列的文章一样,图的边权是通过KNN(k个最近的点与中心点的差)+MLP(多层感知机)提取到的</p>
+<script type="math/tex; mode=display">A = f(X)</script><p>Formally, suppose we sample a graph transformation t from a transformation distribution Tg, i.e., t $\sim$ Tg. Applying the transformation to graph signals X that are sampled from data distribution Xg, i.e., X $\sim$ Xg, leads to the filtered graph signal</p>
+<p>对变换方式的分布进行采样 并对图数据信号进行变换,则得到变换后的图信号</p>
+<script type="math/tex; mode=display">\widetilde{X} = t(X)</script><p>以及变换后的图结构</p>
+<script type="math/tex; mode=display">\widetilde{A} = f(\widetilde{X}) = f(t(X))</script><p>然后对变换前的点云$X$和变换后的点云$\tilde{X}$在共享的encoder中做GCN,</p>
+<script type="math/tex; mode=display">
+X_{n×d}^{output}=A_{n×n}X_{n×d}W_{d×d'}</script><p>encoder得到的特征图中第i个点的特征$a_{i,j}$是 通过 第i个节点特征+ 邻域节点j特征相对原特征的偏移量  并作非线性映射后的最大的边特征</p>
+<p>这个公式打不出来 qaq<br><img src="https://cdn.acwing.com/media/article/image/2020/10/30/39715_37ac56ec1a-cvpr2020graphTER2.PNG" alt=""> </p>
+<p>在encoder后的bottleneck处把$X_{output}和\widetilde{X}_{output}$做拼接<br><img src="https://cdn.acwing.com/media/article/image/2020/10/30/39715_241ac8e41a-cvpr2020graphTER1.PNG" alt=""> </p>
 <p>Node-wise features of the original and transformed graphs are then concatenated at each node, which are then fed into the transformation decoder. The decoder consists of several EdgeConv blocks to aggregate the representations of both the original and transformed graphs to predict the nodewise transformations t. Based on the loss in (5), t is decoded by minimizing the mean squared error (MSE) between the ground truth and estimated transformation parameters at each sampled node. Fig. 4 illustrates the architecture of learning the proposed GraphTER in such an auto-encoder structure.</p>
 <p>decoder也是GCN提特征最后得到变换量的预测$\hat{t}$,</p>
-<p>$$<br>\hat{\mathbf{t}}=D(E(\mathbf{X}, \mathbf{A}), E(\tilde{\mathbf{X}}, \tilde{\mathbf{A}}))<br>$$</p>
-<p>并且我们将预测得到的变换图$\widetilde{t} (N×3)$与t$(N×3)$的均方根误差最小化,通过变化量的loss更新encoder和decoder,<br>$$<br>\min _{E, D} \underset{S \sim \mathcal{Sg}} {\mathbb{E}} \underset{\mathbf{t} \sim \mathcal{Tg}}{\mathbb{E}} loss (\mathbf{t}, \hat{\mathbf{t}})<br>$$</p>
-<p>In the unsupervised feature learning stage, the representation encoder and transformation decoder are jointly trained by minimizing (5).In the supervised evaluation stage, the first several blocks of the<br>encoder are fixed with frozen weights and a linear classifier is trained with labeled samples.</p>
-<p>第一个阶段我们并没有训练encoder去把每个点的类别分开,而只是**通过学习变换量使得我们的encoder在面对带变换的数据时仍然能提取到依然有效的图结构及图特征(对于新的数据更鲁棒)**。</p>
-<p><img src="https://cdn.acwing.com/media/article/image/2020/10/30/39715_0e79d65e1a-cvpr2020graphTER3.PNG" alt="cvpr2020graphTER3.PNG"> </p>
+<script type="math/tex; mode=display">
+\hat{\mathbf{t}}=D(E(\mathbf{X}, \mathbf{A}), E(\tilde{\mathbf{X}}, \tilde{\mathbf{A}}))</script><p>并且我们将预测得到的变换图$\widetilde{t} (N×3)$与t$(N×3)$的均方根误差最小化,通过变化量的loss更新encoder和decoder,</p>
+<script type="math/tex; mode=display">
+\min _{E, D} \underset{S \sim \mathcal{Sg}} {\mathbb{E}} \underset{\mathbf{t} \sim \mathcal{Tg}}{\mathbb{E}} loss (\mathbf{t}, \hat{\mathbf{t}})</script><p>In the unsupervised feature learning stage, the representation encoder and transformation decoder are jointly trained by minimizing (5).In the supervised evaluation stage, the first several blocks of the<br>encoder are fixed with frozen weights and a linear classifier is trained with labeled samples.</p>
+<p>第一个阶段我们并没有训练encoder去把每个点的类别分开,而只是<strong>通过学习变换量使得我们的encoder在面对带变换的数据时仍然能提取到依然有效的图结构及图特征(对于新的数据更鲁棒)</strong>。</p>
+<p><img src="https://cdn.acwing.com/media/article/image/2020/10/30/39715_0e79d65e1a-cvpr2020graphTER3.PNG" alt=""> </p>
 <p>在第二个阶段,将前几层encoder冻结,接近分类器的层的权重能通过梯度更新做下游任务(分割,分类)。</p>
 
                 
@@ -576,16 +578,16 @@
                     
                         <div class="article-tag">
                             
+                                <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
+                                    <span class="chip bg-color">点云数据</span>
+                                </a>
+                            
                                 <a href="/Blogs/tags/%E6%97%A0%E7%9B%91%E7%9D%A3/">
                                     <span class="chip bg-color">无监督</span>
                                 </a>
                             
                                 <a href="/Blogs/tags/%E5%9B%BE%E5%8D%B7%E7%A7%AF/">
                                     <span class="chip bg-color">图卷积</span>
-                                </a>
-                            
-                                <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
-                                    <span class="chip bg-color">点云数据</span>
                                 </a>
                             
                         </div>
@@ -759,59 +761,6 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/Blogs/2020/12/04/%E9%93%BE%E8%A1%A8/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="链表">
-                        
-                        <span class="card-title">链表</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
-                                    数据结构与算法
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/Blogs/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
-                    </a>
-                    
-                    <a href="/Blogs/tags/%E9%93%BE%E8%A1%A8/">
-                        <span class="chip bg-color">链表</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
                 <a href="/Blogs/2020/12/04/CVPR2020-Foreground-Aware%20Relation%20Network%20for%20Geospatial%20Object%20Segmentation%20in%20High%20Spatial%20Resolution%20Remote%20Sensing%20Imagery/">
                     <div class="card-image">
                         
@@ -828,9 +777,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -852,6 +801,59 @@
                     
                     <a href="/Blogs/tags/%E9%81%A5%E6%84%9F%E5%9B%BE%E5%83%8F/">
                         <span class="chip bg-color">遥感图像</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/Blogs/2020/12/04/%E5%8D%95%E8%B0%83%E6%A0%88/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="单调栈">
+                        
+                        <span class="card-title">单调栈</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数据结构与算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/Blogs/tags/%E5%8D%95%E8%B0%83%E6%A0%88/">
+                        <span class="chip bg-color">单调栈</span>
+                    </a>
+                    
+                    <a href="/Blogs/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
                     </a>
                     
                 </div>

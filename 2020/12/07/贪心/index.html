@@ -501,9 +501,7 @@
       i→
 [end1,...,end2,...end3]
             i    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>当i在end1和end2之间一直更新rmax</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+<p>当i在end1和end2之间一直更新rmax<br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">jump</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>nums<span class="token punctuation">)</span><span class="token punctuation">:</span>
         n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
         rmax<span class="token punctuation">,</span>end<span class="token punctuation">,</span>step <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>
@@ -513,20 +511,16 @@
                 <span class="token keyword">if</span> i <span class="token operator">==</span> end<span class="token punctuation">:</span>
                     end <span class="token operator">=</span> rmax
                     step <span class="token operator">+=</span><span class="token number">1</span>
-        <span class="token keyword">return</span> step<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="406-根据身高重建队列"><a href="#406-根据身高重建队列" class="headerlink" title="406 根据身高重建队列"></a>406 根据身高重建队列</h2><p><code>先按大小降序,再按序号升序,即先把大的放完[7,0][5,0],在同样大的情况下并且先把序号低的放掉[5,0][7,0]</code></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> step<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<h2 id="406-根据身高重建队列"><a href="#406-根据身高重建队列" class="headerlink" title="406 根据身高重建队列"></a>406 根据身高重建队列</h2><p><code>先按大小降序,再按序号升序,即先把大的放完[7,0][5,0],在同样大的情况下并且先把序号低的放掉[5,0][7,0]</code><br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">reconstructQueue</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>people<span class="token punctuation">)</span><span class="token punctuation">:</span>
         people<span class="token punctuation">.</span>sort<span class="token punctuation">(</span>key <span class="token operator">=</span> <span class="token keyword">lambda</span> x<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token operator">-</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>x<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
         res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
         <span class="token keyword">for</span> i <span class="token keyword">in</span> people<span class="token punctuation">:</span>
             res<span class="token punctuation">.</span>insert<span class="token punctuation">(</span>i<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span>
             <span class="token comment"># res[i[1]:i[1]] = [i]</span>
-        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="861-反转矩阵后的得分"><a href="#861-反转矩阵后的得分" class="headerlink" title="861 反转矩阵后的得分"></a>861 反转矩阵后的得分</h2><p><code>假设翻转完的顺序无关 则我们可以先翻转行再翻转列,反转行肯定要保证第一个位置是1就越大，翻转列则要保证当列的1的数量&gt;当列的0的数量</code></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<h2 id="861-反转矩阵后的得分"><a href="#861-反转矩阵后的得分" class="headerlink" title="861 反转矩阵后的得分"></a>861 反转矩阵后的得分</h2><p><code>假设翻转完的顺序无关 则我们可以先翻转行再翻转列,反转行肯定要保证第一个位置是1就越大，翻转列则要保证当列的1的数量&gt;当列的0的数量</code><br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">matrixScore</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> A<span class="token punctuation">:</span> List<span class="token punctuation">[</span>List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
         m<span class="token punctuation">,</span>n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token builtin">len</span><span class="token punctuation">(</span>A<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
         <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -545,8 +539,7 @@
         <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
             <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
                 res<span class="token operator">+=</span><span class="token number">1</span><span class="token operator">&lt;&lt;</span><span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span>j<span class="token punctuation">)</span> <span class="token keyword">if</span> A<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token keyword">else</span> <span class="token number">0</span>
-        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+        <span class="token keyword">return</span> res<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 <h2 id="135-分发糖果"><a href="#135-分发糖果" class="headerlink" title="135 分发糖果"></a>135 分发糖果</h2><ul>
 <li>规则定义： 设学生 <code>A</code> 和学生 <code>B</code> 左右相邻，<code>A</code> 在 <code>B</code> 左边；<ul>
 <li><strong>左规则</strong>： 当 $ratings_{B}&gt;ratings_{A}$ $B$的糖比$A$的糖数量多</li>
@@ -565,8 +558,7 @@
 </li>
 <li><p>同理求一遍$right$</p>
 </li>
-<li><p>则最终$res[i] = max(left[i],right[i])$才能同时满足左规则和右规则</p>
-</li>
+<li>则最终$res[i] = max(left[i],right[i])$才能同时满足左规则和右规则</li>
 </ol>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
     <span class="token keyword">def</span> <span class="token function">candy</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> ratings<span class="token punctuation">:</span> List<span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> <span class="token builtin">int</span><span class="token punctuation">:</span>
