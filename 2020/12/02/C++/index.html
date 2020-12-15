@@ -447,8 +447,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/Blogs/categories/C/" class="post-category">
-                                C++
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                数据结构与算法
                             </a>
                         
                     </div>
@@ -460,7 +460,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-12
+                    2020-12-02
                 </div>
                 
 
@@ -509,8 +509,45 @@ public:
 </code></pre>
 </details>
 
+<details>
+<summary>字符串输入输出问题</summary>
+<pre><code>
+<pre class="line-numbers language-none"><code class="language-none">intput 
+3
+11
+antontrygub
+15
+bestcoordinator
+19
+trywatchinggurabruh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+code 
+#include<iostream>
+#include<cstring>
+#include<algorithm>
 
+using namespace std;
+const int N=210;
+char s[N];
+int main()
+&#123;
+    int t=0;
+    cin >> t;
+    while(t--)
+    &#123;
+        int n;
+        cin >> n >> s;//输入string转为char[] 不需要s+n 直接输入s就行
+        sort(s,s+n);
+        for(int i=0;i<n;i++) cout << s[i];
+        cout << endl;
+    &#125;
+    return 0;
+&#125;
 
+<pre class="line-numbers language-none"><code class="language-none">intput带逗号 
+3,11,15,19
+scanf(&quot;%s,%s,%s,%s&quot;,a,b,c,d)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</code></pre>
+</details>
                 
             </div>
             <hr/>
@@ -536,7 +573,7 @@ public:
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://leopoldacc.github.io/Blogs/Blogs/2020/12/12/C++/">https://leopoldacc.github.io/Blogs/Blogs/2020/12/12/C++/</a>
+                    <a href="https://leopoldacc.github.io/Blogs/Blogs/2020/12/02/C++/">https://leopoldacc.github.io/Blogs/Blogs/2020/12/02/C++/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -749,13 +786,13 @@ public:
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/Blogs/2020/12/14/CVPR2020-Geometric%20Adversarial%20Attacks%20and%20Defenses%20on%203D%20Point%20Clouds/">
+                <a href="/Blogs/2020/12/04/%E9%93%BE%E8%A1%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/6.jpg" class="responsive-img" alt="CVPR2020-GraphTER-Unsupervised Learning of Graph Transformation Equivariant Representations via Auto-Encoding Node-wise Transformations">
+                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="链表">
                         
-                        <span class="card-title">CVPR2020-GraphTER-Unsupervised Learning of Graph Transformation Equivariant Representations via Auto-Encoding Node-wise Transformations</span>
+                        <span class="card-title">链表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -766,14 +803,14 @@ public:
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-14
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-04
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                    计算机视觉
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数据结构与算法
                                 </a>
                             
                             
@@ -783,12 +820,12 @@ public:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB/">
-                        <span class="chip bg-color">对抗攻击</span>
+                    <a href="/Blogs/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
                     </a>
                     
-                    <a href="/Blogs/tags/%E7%82%B9%E4%BA%91%E6%95%B0%E6%8D%AE/">
-                        <span class="chip bg-color">点云数据</span>
+                    <a href="/Blogs/tags/%E9%93%BE%E8%A1%A8/">
+                        <span class="chip bg-color">链表</span>
                     </a>
                     
                 </div>
@@ -799,16 +836,16 @@ public:
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/Blogs/2020/12/09/HRNet-OCR%20Pytorch%E7%AE%80%E6%98%93%E7%89%88%E5%AE%9E%E7%8E%B0/">
+                <a href="/Blogs/2020/12/02/C++/">
                     <div class="card-image">
                         
                         
-                        <img src="/Blogs/medias/featureimages/18.jpg" class="responsive-img" alt="HRNet-OCR by Pytorch">
+                        <img src="/Blogs/medias/featureimages/3.jpg" class="responsive-img" alt="C++">
                         
-                        <span class="card-title">HRNet-OCR by Pytorch</span>
+                        <span class="card-title">C++</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -819,29 +856,26 @@ public:
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-02
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/Blogs/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" class="post-category">
-                                    计算机视觉
+                            <a href="/Blogs/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="post-category">
+                                    数据结构与算法
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/Blogs/tags/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
-                        <span class="chip bg-color">语义分割</span>
-                    </a>
-                    
-                    <a href="/Blogs/tags/SOTA/">
-                        <span class="chip bg-color">SOTA</span>
+                    <a href="/Blogs/tags/STL/">
+                        <span class="chip bg-color">STL</span>
                     </a>
                     
                 </div>
