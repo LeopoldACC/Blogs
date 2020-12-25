@@ -543,11 +543,55 @@ int main()
     return 0;
 &#125;
 
-<pre class="line-numbers language-none"><code class="language-none">intput带逗号 
+intput带逗号 
 3,11,15,19
-scanf(&quot;%s,%s,%s,%s&quot;,a,b,c,d)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+scanf("%s,%s,%s,%s",a,b,c,d)
 </code></pre>
 </details>
+
+<h2 id="创建动态规划数组tle问题"><a href="#创建动态规划数组tle问题" class="headerlink" title="创建动态规划数组tle问题"></a>创建动态规划数组tle问题</h2><h3 id="创成bool数组不能过"><a href="#创成bool数组不能过" class="headerlink" title="创成bool数组不能过"></a>创成bool数组不能过</h3><pre class="line-numbers language-none"><code class="language-none">class Solution &#123;
+public:
+    string longestPalindrome(string s) &#123;
+        int n &#x3D; s.size();
+        vector&lt;vector&lt;bool&gt;&gt;f(n,vector&lt;bool&gt;(n,0));
+        string res;
+        for(int i&#x3D;n-1;i&gt;&#x3D;0;i--)
+        &#123;
+            for(int j&#x3D;i;j&lt;n;j++)
+            &#123;
+                if(j-i+1&gt;2)f[i][j]&#x3D;s[i]&#x3D;&#x3D;s[j]?f[i+1][j-1]:false;
+                else f[i][j]&#x3D;s[i]&#x3D;&#x3D;s[j]?true:false;
+                if(f[i][j]&amp;&amp;j-i+1&gt;res.size())res &#x3D; s.substr(i,j-i+1);        
+            &#125;
+        &#125;
+        return res;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="创成int数组或者静态bool数组能过"><a href="#创成int数组或者静态bool数组能过" class="headerlink" title="创成int数组或者静态bool数组能过"></a>创成int数组或者静态bool数组能过</h3><pre class="line-numbers language-none"><code class="language-none">const int N&#x3D;100010;
+bool f[n][n];
+
+class Solution &#123;
+public:
+    string longestPalindrome(string s) &#123;
+        int n &#x3D; s.size();
+        vector&lt;vector&lt;int&gt;&gt;f(n,vector&lt;int&gt;(n,0));
+        string res;
+        int l,r,maxi;
+        for(int i&#x3D;n-1;i&gt;&#x3D;0;i--)
+        &#123;
+            for(int j&#x3D;i;j&lt;n;j++)
+            &#123;
+                if(j-i+1&gt;2&amp;&amp;s[i]&#x3D;&#x3D;s[j])f[i][j]&#x3D;f[i+1][j-1];
+                else f[i][j]&#x3D;s[i]&#x3D;&#x3D;s[j]?1:0;
+                if(f[i][j]&#x3D;&#x3D;1&amp;&amp;j-i+1&gt;maxi)
+                &#123;
+                    l&#x3D;i,r&#x3D;j,maxi&#x3D;j-i+1;
+                &#125;        
+            &#125;
+        &#125;
+        return s.substr(l,r-l+1);
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
