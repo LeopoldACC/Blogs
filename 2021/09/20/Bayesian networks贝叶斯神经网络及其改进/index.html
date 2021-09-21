@@ -506,7 +506,7 @@
 \end{aligned}</script><p>但通过最大似然或最大后验学出来的都是权重$w$的定值，那么我们如果想知道$w$的分布应该怎么办呢？</p>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1505.05424">ICML 2015 Weight Uncertainty in Neural Networks</a>这篇论文做了相关的工作 </p>
 <div align=center>
-<img src = ./assets/bayesian1.png>
+<img src = https://cdn.acwing.com/media/article/image/2021/09/21/39715_e9fd8dfe1a-bayesian1.PNG>
 </div>
 
 <p>左边的一般的神经网络的权重每次更新后是一个定值，右边的神经网络的权重是一个分布，是一个随机变量</p>
@@ -533,7 +533,7 @@ P(w \mid D) = \frac{P(D \mid w) * P(w)}{\sum_{w} P(D \mid w) * P(w)}</script><p>
 <p>当我们的$\theta$定义为μ和ρ的时候，我们就能实现通过优化上述表达式得到权重$w$的后验分布</p>
 <h3 id="talk-is-cheap-show-me-your-code"><a href="#talk-is-cheap-show-me-your-code" class="headerlink" title="talk is cheap,show me your code"></a>talk is cheap,show me your code</h3><p><a target="_blank" rel="noopener" href="https://github.com/IntelLabs/bayesian-torch">code</a><br>torch版 by Intel Research Lab的大佬</p>
 <div align=center>
-<img src = ./assets/bayesian2.png>
+<img src = https://cdn.acwing.com/media/article/image/2021/09/21/39715_f5856be41a-bayesian2.PNG>
 </div>
 
 <p>首先实现了一个基础变分层类，里面主要只有一个函数kl_div用来计算两个正态分布的KL散度，这个式子的话是从两个正态分布的对数期望通过简化后的表达式</p>
@@ -549,7 +549,7 @@ P(w \mid D) = \frac{P(D \mid w) * P(w)}{\sum_{w} P(D \mid w) * P(w)}</script><p>
 \end{aligned}</script><script type="math/tex; mode=display">
 \mathrm{KL}(q \| p)=\log \sigma_{2}-\log \sigma_{1}+\frac{\sigma_{1}^{2}+\left(\mu_{1}-\mu_{2}\right)^{2}}{2 \sigma_{2}^{2}}-\frac{1}{2}</script><p>重参数化卷积的具体实现，</p>
 <div align=center>
-<img src = ./assets/bayesian3.png>
+<img src = https://cdn.acwing.com/media/article/image/2021/09/21/39715_fb4355c71a-bayesian3.PNG>
 </div>
 
 <p>他首先继承了刚刚的基础变分层类，从而可以计算训练集下后验$P(w\mid D)$和参数θ下$q(w|\theta)$的kl散度</p>
@@ -558,7 +558,7 @@ P(w \mid D) = \frac{P(D \mid w) * P(w)}{\sum_{w} P(D \mid w) * P(w)}</script><p>
 <p>通过输入的初始后验μ和σ和0.1的标准差初始化θ参数化下的后验μ和后验σ</p>
 <p>线性层同理</p>
 <div align=center>
-<img src = ./assets/bayesian4.png>
+<img src = https://cdn.acwing.com/media/article/image/2021/09/21/39715_02559fbb1a-bayesian4.PNG>
 </div>
 
 <p>则Resnet的一个BasicBlock的BNN形式如下，在前传的时候将各个Linear和Conv的kl损失累加起来<br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">BasicBlock</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>
